@@ -3,6 +3,7 @@
     package="com.example.proj1_tablayout" >
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
 
     <application
         android:allowBackup="true"

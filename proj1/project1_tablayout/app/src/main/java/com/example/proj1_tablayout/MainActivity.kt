@@ -32,7 +32,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED){
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED &&
+            ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_CONTACTS)== PackageManager.PERMISSION_GRANTED
+                ){
             Toast.makeText(this, "permission granted", Toast.LENGTH_SHORT).show()
         }
         else{
@@ -67,11 +71,16 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-            == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED &&
+            ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_CONTACTS)== PackageManager.PERMISSION_GRANTED
+        ) {
             showDialog("Permission granted")
         } else {
-            requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+            requestPermissions(
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.READ_CONTACTS),
                 PERMISSION_REQUEST_CODE)
         }
     }
@@ -90,7 +99,10 @@ class MainActivity : AppCompatActivity() {
                     if (shouldShowRequestPermissionRationale(
                             Manifest.permission.READ_EXTERNAL_STORAGE)) {
                         Log.d(TAG, "User declined, but i can still ask for more")
-                        requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                        requestPermissions(
+                            arrayOf(
+                                Manifest.permission.READ_EXTERNAL_STORAGE,
+                                Manifest.permission.READ_CONTACTS),
                             PERMISSION_REQUEST_CODE)
                     } else {
                         Log.d(TAG, "User declined and i can't ask")
