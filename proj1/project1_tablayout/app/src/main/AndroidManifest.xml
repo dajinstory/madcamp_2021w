@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Proj1_tablayout" >
-        <activity android:name=".MainActivity" >
+        <activity android:name=".PermissionActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,6 +21,8 @@
         </activity>
 
         <activity android:name = ".OpenGalleryFolderActivity"/>
+
+        <activity android:name=".MainActivity"/>
 
         <activity android:name=".ShowFullImageActivity"/>
     </application>
