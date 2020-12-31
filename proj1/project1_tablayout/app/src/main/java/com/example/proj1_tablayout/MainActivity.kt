@@ -32,15 +32,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED &&
-            ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_CONTACTS)== PackageManager.PERMISSION_GRANTED
-                ){
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED &&
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_CONTACTS
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
             Toast.makeText(this, "permission granted", Toast.LENGTH_SHORT).show()
-        }
-        else{
+        } else {
             requestRuntimePermissions()
+
         }
 
         val contactFragment = ContactFragmentTab()
@@ -63,6 +67,7 @@ class MainActivity : AppCompatActivity() {
         tablayout.getTabAt(2)?.setCustomView(createView("TBD"))
 
     }
+    
 
     private fun requestRuntimePermissions() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
@@ -71,18 +76,12 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED &&
-            ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_CONTACTS)== PackageManager.PERMISSION_GRANTED
-        ) {
-            showDialog("Permission granted")
-        } else {
-            requestPermissions(
-                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.READ_CONTACTS),
-                PERMISSION_REQUEST_CODE)
-        }
+
+        requestPermissions(
+            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.READ_CONTACTS),
+            PERMISSION_REQUEST_CODE)
+
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
