@@ -15,6 +15,7 @@ import com.example.proj1_tablayout.R
 import com.example.proj1_tablayout.adapter.GalleryAdapter
 import com.example.proj1_tablayout.adapter.InGalleryImageAdapter
 import com.example.proj1_tablayout.model.MediaFileData
+import kotlinx.android.synthetic.main.folder_image_item.*
 import kotlinx.android.synthetic.main.galleryfragment_tab.view.*
 import java.util.*
 
@@ -37,15 +38,26 @@ class GalleryFragmentTab : Fragment() {
         val ImageDataset = getFileList(requireContext(), MediaStoreFileType.IMAGE)
 
         val folderDataset = mutableListOf<MediaFileData>()
+        val countImages = mutableListOf<Int>()
+        val folderId = mutableListOf<Long>()
 
         val condition:(MediaFileData,MediaFileData)->Boolean= { mdf1: MediaFileData, mdf2: MediaFileData -> mdf1.bucketId == mdf2.bucketId }
 
-        ImageDataset.forEach{ if (listContainsContitionedItem(folderDataset, it, condition).not()) folderDataset.add(it) }
-
+        ImageDataset.forEach{
+            if (listContainsContitionedItem(folderDataset, it, condition).not()) {
+                folderDataset.add(it)
+                countImages.add(1)
+                folderId.add(it.bucketId)
+            }
+            else{
+                countImages[folderId.indexOf(it.bucketId)] += 1
+            }
+        }
 
         val recyclerView: RecyclerView = view.gallery
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
-        recyclerView.adapter = GalleryAdapter(requireContext(), folderDataset)
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        recyclerView.adapter = GalleryAdapter(requireContext(), folderDataset, countImages)
+
 
     }
 
@@ -107,7 +119,7 @@ class GalleryFragmentTab : Fragment() {
         return folderList
     }
 
-    fun <E> listContainsContitionedItem(list: MutableList<E>, item: E, condition: (E, E) -> Boolean): Boolean {
+    private fun <E> listContainsContitionedItem(list: MutableList<E>, item: E, condition: (E, E) -> Boolean): Boolean {
         list.forEach { when (condition(it, item)){ true -> return true} }
         return false
     }

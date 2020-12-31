@@ -15,6 +15,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 
 class PermissionActivity: AppCompatActivity() {
+    companion object {
+        const val TAG = "PERMISSION_ACTIVITY"
+        const val PERMISSION_REQUEST_CODE = 1001
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.permission_activity)
@@ -52,7 +57,7 @@ class PermissionActivity: AppCompatActivity() {
         requestPermissions(
             arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.READ_CONTACTS),
-            MainActivity.PERMISSION_REQUEST_CODE
+            PermissionActivity.PERMISSION_REQUEST_CODE
         )
 
     }
@@ -61,25 +66,25 @@ class PermissionActivity: AppCompatActivity() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>,
                                             grantResults: IntArray) {
         when (requestCode) {
-            MainActivity.PERMISSION_REQUEST_CODE -> {
+            PermissionActivity.PERMISSION_REQUEST_CODE -> {
                 if (grantResults.isEmpty()) {
                     throw RuntimeException("Empty permission result")
                 }
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    showDialog("Permission granted")
+                    //showDialog("Permission granted")
                     startMainActivity()
                 } else {
                     if (shouldShowRequestPermissionRationale(
                             Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                        Log.d(MainActivity.TAG, "User declined, but i can still ask for more")
+                        Log.d(PermissionActivity.TAG, "User declined, but i can still ask for more")
                         requestPermissions(
                             arrayOf(
                                 Manifest.permission.READ_EXTERNAL_STORAGE,
                                 Manifest.permission.READ_CONTACTS),
-                            MainActivity.PERMISSION_REQUEST_CODE
+                            PermissionActivity.PERMISSION_REQUEST_CODE
                         )
                     } else {
-                        Log.d(MainActivity.TAG, "User declined and i can't ask")
+                        Log.d(PermissionActivity.TAG, "User declined and i can't ask")
                         showDialogToGetPermission()
                     }
                 }

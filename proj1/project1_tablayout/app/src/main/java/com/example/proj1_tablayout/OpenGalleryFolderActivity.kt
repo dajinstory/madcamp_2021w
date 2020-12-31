@@ -5,26 +5,33 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proj1_tablayout.adapter.InGalleryImageAdapter
 import com.example.proj1_tablayout.fragments.GalleryFragmentTab
 import com.example.proj1_tablayout.model.MediaFileData
+import kotlinx.android.synthetic.main.folder_image_item.*
 import kotlinx.android.synthetic.main.opengalleryfolder_activity.*
 import java.util.*
 
 class OpenGalleryFolderActivity:AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.opengalleryfolder_activity)
 
         val bucketId=intent.getLongExtra("bucketId", -100)
+        val bucketName=intent.getStringExtra("bucketName")
+
+        actionBar?.title = bucketName;
+        supportActionBar?.title = bucketName;
+        setContentView(R.layout.opengalleryfolder_activity)
 
         val ImageDataset = getFileList(this, GalleryFragmentTab.MediaStoreFileType.IMAGE).filter{ it.bucketId == bucketId }
 
         val recyclerView: RecyclerView = opened_gallery
-        recyclerView.layoutManager = GridLayoutManager(this, 3)
+
+        recyclerView.layoutManager = GridLayoutManager(this, 4)
         recyclerView.adapter = InGalleryImageAdapter(this, ImageDataset)
     }
 

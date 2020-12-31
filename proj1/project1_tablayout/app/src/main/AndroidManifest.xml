@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.proj1_tablayout" >
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.proj1_tablayout">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
@@ -11,7 +12,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Proj1_tablayout" >
+        android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar" >
         <activity android:name=".PermissionActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +25,7 @@
 
         <activity android:name=".MainActivity"/>
 
-        <activity android:name=".ShowFullImageActivity"/>
+        <activity android:name=".ShowFullImageActivity" />
     </application>
 
 </manifest>

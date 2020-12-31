@@ -11,6 +11,9 @@ class ShowFullImageActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        actionBar?.hide();
+        supportActionBar?.hide();
+
         setContentView(R.layout.show_full_image_activity)
 
         val uri = Uri.parse(intent.getStringExtra("uri"))

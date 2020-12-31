@@ -23,10 +23,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.custom_tab_button.view.*
 
 class MainActivity : AppCompatActivity() {
-    companion object {
-        const val TAG = "MainActivity"
-        const val PERMISSION_REQUEST_CODE = 1001
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
