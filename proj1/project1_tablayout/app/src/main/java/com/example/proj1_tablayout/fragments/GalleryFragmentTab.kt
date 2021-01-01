@@ -1,13 +1,16 @@
 package com.example.proj1_tablayout.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +19,11 @@ import com.example.proj1_tablayout.adapter.GalleryAdapter
 import com.example.proj1_tablayout.adapter.InGalleryImageAdapter
 import com.example.proj1_tablayout.model.MediaFileData
 import kotlinx.android.synthetic.main.folder_image_item.*
+import kotlinx.android.synthetic.main.galleryfragment_tab.*
 import kotlinx.android.synthetic.main.galleryfragment_tab.view.*
+import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -54,11 +61,52 @@ class GalleryFragmentTab : Fragment() {
             }
         }
 
+
+
+        camerafab.setOnClickListener {
+            dispatchTakePictureIntent()
+            createImageFile()
+            Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE).also { mediaScanIntent ->
+            val f = File(currentPhotoPath)
+            mediaScanIntent.data = Uri.fromFile(f)
+            context!!.sendBroadcast(mediaScanIntent)
+            }
+        }
+
         val recyclerView: RecyclerView = view.gallery
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         recyclerView.adapter = GalleryAdapter(requireContext(), folderDataset, countImages)
 
 
+    }
+
+    val REQUEST_TAKE_PHOTO = 1
+
+    val REQUEST_IMAGE_CAPTURE = 1
+
+    private fun dispatchTakePictureIntent() {
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            takePictureIntent.resolveActivity(context!!.packageManager)?.also {
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+            }
+        }
+    }
+
+    lateinit var currentPhotoPath: String
+
+    @Throws(IOException::class)
+    private fun createImageFile(): File {
+        // Create an image file name
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val storageDir: File = context!!.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
+        return File.createTempFile(
+            "JPEG_${timeStamp}_", /* prefix */
+            ".jpg", /* suffix */
+            storageDir /* directory */
+        ).apply {
+            // Save a file: path for use with ACTION_VIEW intents
+            currentPhotoPath = absolutePath
+        }
     }
 
     // return MediaFileData which contains id, dateTaken, displayName, uri

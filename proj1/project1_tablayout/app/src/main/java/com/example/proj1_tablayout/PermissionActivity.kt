@@ -24,22 +24,36 @@ class PermissionActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.permission_activity)
 
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) == PackageManager.PERMISSION_GRANTED &&
-            ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.READ_CONTACTS
-            ) == PackageManager.PERMISSION_GRANTED
+        val permissionList = arrayOf(
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.READ_CONTACTS,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+        )
+
+        if (checkPermission(permissionList).isEmpty()
         ) {
             Toast.makeText(this, "permission granted", Toast.LENGTH_SHORT).show()
             startMainActivity()
         } else {
-            requestRuntimePermissions()
+            requestRuntimePermissions(permissionList)
         }
 
 
+    }
+
+    private fun checkPermission(permissions: Array<String>): MutableList<String> {
+        val notGrantedArray = mutableListOf<String>()
+
+        permissions.forEach {
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    it
+                ) != PackageManager.PERMISSION_GRANTED){
+                notGrantedArray.add(it)
+            }
+        }
+
+        return notGrantedArray
     }
 
     private fun startMainActivity(){
@@ -47,7 +61,7 @@ class PermissionActivity: AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun requestRuntimePermissions() {
+    private fun requestRuntimePermissions(permissions: Array<String>) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             // Don't need to request
             // It's supported in devices running VERSION_CODES.M or higher
@@ -55,11 +69,9 @@ class PermissionActivity: AppCompatActivity() {
         }
 
         requestPermissions(
-            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.READ_CONTACTS),
+            permissions,
             PermissionActivity.PERMISSION_REQUEST_CODE
         )
-
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -78,9 +90,7 @@ class PermissionActivity: AppCompatActivity() {
                             Manifest.permission.READ_EXTERNAL_STORAGE)) {
                         Log.d(PermissionActivity.TAG, "User declined, but i can still ask for more")
                         requestPermissions(
-                            arrayOf(
-                                Manifest.permission.READ_EXTERNAL_STORAGE,
-                                Manifest.permission.READ_CONTACTS),
+                            permissions,
                             PermissionActivity.PERMISSION_REQUEST_CODE
                         )
                     } else {
