@@ -1,8 +1,12 @@
 package com.example.proj1_tablayout.fragments
 
+import android.app.Activity
 import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +19,10 @@ import com.example.proj1_tablayout.R
 import com.example.proj1_tablayout.adapter.ContactsAdapter
 import com.example.proj1_tablayout.model.ContactDatabase
 import com.example.proj1_tablayout.model.Contact
+import com.example.proj1_tablayout.model.MediaFileData
+import json2contacts
 import kotlinx.android.synthetic.main.fragment_contacts.view.*
+import java.util.*
 
 
 class ContactsFragment : Fragment() {
@@ -28,42 +35,48 @@ class ContactsFragment : Fragment() {
     ): View? {
         val view=inflater.inflate(R.layout.fragment_contacts,container,false)
 
-        view.fab.setOnClickListener{
-            val nextIntent = Intent(requireContext(), ContactActivity::class.java)
-            nextIntent.putExtra("id", -1)
-            startActivityForResult(nextIntent, 0)
-        }
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Case #1 : Use Inmemory Dataset with Room
         var contactsRoomDataset = ContactDatabase.getInstance(requireContext())
         var contactDataset = contactsRoomDataset?.contactDao()?.getAll() ?: emptyArray<Contact>() as List<Contact>
 
+        // Case #2 : Use Inmemory Object by loading json file
+        //var contactDataset = json2contacts("database.json", requireContext())
+
+        // Set RecyclerView
         var recyclerView: RecyclerView = view.contacts
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = ContactsAdapter(requireContext(), contactDataset)
+
+        // Set fab
+        view.fab.setOnClickListener{
+            val nextIntent = Intent(requireContext(), ContactActivity::class.java)
+            nextIntent.putExtra("idx", contactDataset.lastIndex)
+            startActivityForResult(nextIntent, 0)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode == Activity.RESULT_OK){
+            when (requestCode){
+                0 -> {
+                    var contactDataset = json2contacts("database.json", requireContext())
 
-        if(requestCode == 0 && resultCode == RESULT_OK){
-//            val delId = data?.getExtras()?.get("del_id")
-//            val newId = data?.getExtras()?.get("new_id")
-//            val newName = data?.getExtras()?.get("new_name")
-//            val newPhoneNumber = data?.getExtras()?.get("new_phone_number")
-//            val newEmail = data?.getExtras()?.get("new_email")
-//            val newGroup = data?getExtras()?.get("new_group")
-
-            var contactsRoomDataset = ContactDatabase.getInstance(requireContext())
-            var contactDataset = contactsRoomDataset?.contactDao()?.getAll() ?: emptyArray<Contact>() as List<Contact>
-
-            var recyclerView: RecyclerView = requireView().contacts
-            recyclerView.layoutManager = LinearLayoutManager(requireContext())
-            recyclerView.adapter = ContactsAdapter(requireContext(), contactDataset)
+                    var recyclerView: RecyclerView = requireView().contacts
+                    recyclerView.layoutManager = LinearLayoutManager(requireContext())
+                    recyclerView.adapter = ContactsAdapter(requireContext(), contactDataset)
+                }
+            }
         }
+    }
+
+    fun loadContactsFromPhone() {
+        print(1)
     }
 }

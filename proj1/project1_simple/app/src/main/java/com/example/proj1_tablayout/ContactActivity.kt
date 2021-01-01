@@ -7,61 +7,63 @@ import android.text.SpannableStringBuilder
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proj1_tablayout.model.Contact
 import com.example.proj1_tablayout.model.ContactDatabase
+import json2contacts
 import kotlinx.android.synthetic.main.activity_contact.*
 import kotlinx.android.synthetic.main.item_contact_column.view.*
 import kotlinx.android.synthetic.main.item_contact_detail.view.*
+import saveContactsToJson
 
 class ContactActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact)
 
+        // Case #1 : Use Inmemory Dataset with Room
         var contactsRoomDataset = ContactDatabase.getInstance(this)
         var contactDataset = contactsRoomDataset?.contactDao()?.getAll() ?: emptyArray<Contact>() as List<Contact>
 
-        var id: Int = intent.getIntExtra("id", -1)
+        // Case #2 : Use Inmemory Object by loading json file
+        //var contactDataset = json2contacts("database.json", this)
+
+        // Get Id of contact
+        var idx: Int = intent.getIntExtra("idx", -1)
+        var id:Int = contactDataset[idx]?.id ?: contactDataset[idx-1]?.id+1 ?: 1
+        var name: String = contactDataset[idx]?.name ?: "name"
+        var phoneNumber: String = contactDataset[idx]?.phoneNumber ?: "phone_number"
+        var email: String = contactDataset[idx]?.email ?: "email"
+        var group: String = contactDataset[idx]?.group ?: "group"
 
         contact_detail.key_name.row_keyword.text = "name"
         contact_detail.key_phone_number.row_keyword.text = "cell #"
         contact_detail.key_email.row_keyword.text = "e-mail"
         contact_detail.key_group.row_keyword.text = "group"
+        contact_detail.key_name.row_value.text = SpannableStringBuilder(name)
+        contact_detail.key_phone_number.row_value.text = SpannableStringBuilder(phoneNumber)
+        contact_detail.key_email.row_value.text = SpannableStringBuilder(email)
+        contact_detail.key_group.row_value.text = SpannableStringBuilder(group)
 
-        if(id!=1){
-            contact_detail.key_name.row_value.text = SpannableStringBuilder(contactDataset[id].name)
-            contact_detail.key_phone_number.row_value.text = SpannableStringBuilder(contactDataset[id].phoneNumber)
-            contact_detail.key_email.row_value.text = SpannableStringBuilder(contactDataset[id].email)
-            contact_detail.key_group.row_value.text = SpannableStringBuilder(contactDataset[id].group)
-        }
-
+        // edit or create contact
         save_button.setOnClickListener {
-            // delete
-            if(id!=-1){
+            // get input data
+            name = contact_detail.key_name.row_value.text.toString()
+            phoneNumber = contact_detail.key_phone_number.row_value.text.toString()
+            email = contact_detail.key_email.row_value.text.toString()
+            group = contact_detail.key_group.row_value.text.toString()
+            val new_contact = Contact(id, name, phoneNumber, email, group, "None")
+
+            // update dataset
+            if (idx == contactDataset.lastIndex){
+                contactsRoomDataset!!.contactDao().insert(new_contact)
+
+            } else{
                 contactsRoomDataset!!.contactDao().deleteByUserId(id)
+                contactsRoomDataset!!.contactDao().insert(new_contact)
             }
-
-            // add
-            val newId = contactDataset[contactDataset.lastIndex].id + 1
-            val name = contact_detail.key_name.row_value.text.toString()
-            val phoneNumber = contact_detail.key_phone_number.row_value.text.toString()
-            val email = contact_detail.key_email.row_value.text.toString()
-            val group = contact_detail.key_group.row_value.text.toString()
-            val new_contact = Contact(newId, name, phoneNumber, email, group, "None")
-            contactsRoomDataset!!.contactDao().insert(new_contact)
-
-            // update database
-            contactsRoomDataset = ContactDatabase.getInstance(this)
-            contactDataset = contactsRoomDataset?.contactDao()?.getAll() ?: emptyArray<Contact>() as List<Contact>
 
             // move to mainactivity
             val returnIntent = Intent(this, MainActivity::class.java)
-//            returnIntent.putExtra("del_id", id)
-//            returnIntent.putExtra("new_id", newId)
-//            returnIntent.putExtra("new_name", name)
-//            returnIntent.putExtra("new_phone_number", phoneNumber)
-//            returnIntent.putExtra("new_email", email)
-//            returnIntent.putExtra("new_group", group)
-
-            setResult(RESULT_OK, returnIntent)
+            setResult(Activity.RESULT_OK, returnIntent)
+            finish()
         }
     }
 }

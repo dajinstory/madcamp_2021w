@@ -45,7 +45,7 @@ abstract class ContactDatabase : RoomDatabase() {
     companion object {
 
         private var instance: ContactDatabase? = null
-
+        private var is_init: Boolean = true
         @Synchronized
         fun getInstance(context: Context): ContactDatabase? {
             if (instance == null) {
@@ -54,15 +54,17 @@ abstract class ContactDatabase : RoomDatabase() {
                     .fallbackToDestructiveMigration()
                     .allowMainThreadQueries()
                     .build()
+            }
+            if(is_init){
                 init_database(context)
+                is_init=false
             }
             return instance
         }
 
         fun init_database(context: Context){
             val contacts = json2contacts("database.json", context)
-            //instance!!.contactDao().insert(contacts[0])
-            instance?.contactDao()?.insertAll(contacts)
+            instance!!.contactDao().insertAll(contacts)
         }
     }
 }

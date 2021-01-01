@@ -35,7 +35,7 @@ class ContactsAdapter(private val context : Context, private val dataset: List<C
         holder.phone_number.text = item?.phoneNumber ?: "None"
         holder.itemView.setOnClickListener{
             val nextIntent = Intent(context, ContactActivity::class.java)
-            nextIntent.putExtra("id", position)
+            nextIntent.putExtra("idx", position)
             context.startActivity(nextIntent)
         }
     }
