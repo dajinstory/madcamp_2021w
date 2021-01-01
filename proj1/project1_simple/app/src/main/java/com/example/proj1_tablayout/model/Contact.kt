@@ -2,7 +2,6 @@ package com.example.proj1_tablayout.model
 
 import android.content.Context
 import androidx.room.*
-import getJsonDataFromAsset
 import json2contacts
 
 @Entity
@@ -31,6 +30,9 @@ interface ContactDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(contacts: List<Contact>)
+
+    @Query("DELETE FROM contact WHERE id = :id")
+    fun deleteByUserId(id: Int)
 
     @Delete
     fun delete(contact: Contact)

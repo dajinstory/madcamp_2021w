@@ -1,5 +1,6 @@
 package com.example.proj1_tablayout.fragments
 
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -30,7 +31,7 @@ class ContactsFragment : Fragment() {
         view.fab.setOnClickListener{
             val nextIntent = Intent(requireContext(), ContactActivity::class.java)
             nextIntent.putExtra("id", -1)
-            startActivity(nextIntent)
+            startActivityForResult(nextIntent, 0)
         }
         return view
     }
@@ -38,12 +39,31 @@ class ContactsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val contactsRoomDataset = ContactDatabase.getInstance(requireContext())
+        var contactsRoomDataset = ContactDatabase.getInstance(requireContext())
         var contactDataset = contactsRoomDataset?.contactDao()?.getAll() ?: emptyArray<Contact>() as List<Contact>
 
-        val recyclerView: RecyclerView = view.contacts
+        var recyclerView: RecyclerView = view.contacts
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = ContactsAdapter(requireContext(), contactDataset)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(requestCode == 0 && resultCode == RESULT_OK){
+//            val delId = data?.getExtras()?.get("del_id")
+//            val newId = data?.getExtras()?.get("new_id")
+//            val newName = data?.getExtras()?.get("new_name")
+//            val newPhoneNumber = data?.getExtras()?.get("new_phone_number")
+//            val newEmail = data?.getExtras()?.get("new_email")
+//            val newGroup = data?getExtras()?.get("new_group")
+
+            var contactsRoomDataset = ContactDatabase.getInstance(requireContext())
+            var contactDataset = contactsRoomDataset?.contactDao()?.getAll() ?: emptyArray<Contact>() as List<Contact>
+
+            var recyclerView: RecyclerView = requireView().contacts
+            recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            recyclerView.adapter = ContactsAdapter(requireContext(), contactDataset)
+        }
+    }
 }
