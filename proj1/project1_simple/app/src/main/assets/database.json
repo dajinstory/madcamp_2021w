@@ -1,0 +1,59 @@
+[
+    {
+      "id":1,
+      "name":"한다진",
+      "phoneNumber":"010-2694-4112",
+      "email":"dajinstory@gmail.com",
+      "group":"3분반",
+      "image":"sample.png"
+    }, {
+      "id":2,
+      "name":"이정인",
+      "phoneNumber":"010-2694-4112",
+      "email":"dajinstory@gmail.com",
+      "group":"3분반",
+      "image":"sample.png"
+    }, {
+      "id":3,
+      "name":"신정윤",
+      "phoneNumber":"010-2694-4112",
+      "email":"dajinstory@gmail.com",
+      "group":"3분반",
+      "image":"sample.png"
+    }, {
+      "id":4,
+      "name":"김철환",
+      "phoneNumber":"010-2694-4112",
+      "email":"dajinstory@gmail.com",
+      "group":"3분반",
+      "image":"sample.png"
+    }, {
+      "id":5,
+      "name":"김현아",
+      "phoneNumber":"010-2694-4112",
+      "email":"dajinstory@gmail.com",
+      "group":"3분반",
+      "image":"sample.png"
+    }, {
+      "id":6,
+      "name":"우혜인",
+      "phoneNumber":"010-2694-4112",
+      "email":"dajinstory@gmail.com",
+      "group":"3분반",
+      "image":"sample.png"
+    }, {
+      "id":7,
+      "name":"서승연",
+      "phoneNumber":"010-2694-4112",
+      "email":"dajinstory@gmail.com",
+      "group":"3분반",
+      "image":"sample.png"
+    }, {
+      "id":8,
+      "name":"심건희",
+      "phoneNumber":"010-2694-4112",
+      "email":"dajinstory@gmail.com",
+      "group":"3분반",
+      "image":"sample.png"
+    }
+]
