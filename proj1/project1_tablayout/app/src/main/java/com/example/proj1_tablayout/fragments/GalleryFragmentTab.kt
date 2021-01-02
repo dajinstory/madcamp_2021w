@@ -10,15 +10,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proj1_tablayout.R
 import com.example.proj1_tablayout.adapter.GalleryAdapter
-import com.example.proj1_tablayout.adapter.InGalleryImageAdapter
 import com.example.proj1_tablayout.model.MediaFileData
-import kotlinx.android.synthetic.main.folder_image_item.*
 import kotlinx.android.synthetic.main.galleryfragment_tab.*
 import kotlinx.android.synthetic.main.galleryfragment_tab.view.*
 import java.io.File
@@ -35,8 +32,7 @@ class GalleryFragmentTab : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view=inflater.inflate(R.layout.galleryfragment_tab,container,false)
-        return view
+        return inflater.inflate(R.layout.galleryfragment_tab,container,false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
