@@ -1,5 +1,6 @@
 package com.example.proj1_tablayout.adapter
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.database.Cursor
@@ -8,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.recyclerview.widget.RecyclerView
+import com.example.proj1_tablayout.ContactActivity
 import com.example.proj1_tablayout.MainActivity
 import com.example.proj1_tablayout.R
 import com.example.proj1_tablayout.model.Contact
@@ -26,12 +29,14 @@ class ContactCursorAdapter(private val context : Context, cursor: Cursor)
 
         fun setItem(item: Contact, position: Int) {
             // image.?? = item?.image ?: "default.png"
-            phone_number.text = item?.phoneNumber ?: "None"
             name.text = item?.name ?: "None"
+            phone_number.text = item?.phoneNumber ?: "None"
             itemView.setOnClickListener {
-                val nextIntent = Intent(_view.context, MainActivity::class.java)
-                nextIntent.putExtra("idx", position)
-                _view.context.startActivity(nextIntent)
+                val nextIntent = Intent(_view.context, ContactActivity::class.java)
+                val requestCode: Int = 1 // EDIT
+                nextIntent.putExtra("operation", "edit")
+                nextIntent.putExtra("position", position)
+                (_view.context as Activity).startActivityForResult(nextIntent, requestCode)
             }
         }
 
@@ -56,5 +61,6 @@ class ContactCursorAdapter(private val context : Context, cursor: Cursor)
     override fun getItemCount(): Int {
         return cursor?.count ?: 0
     }
+
 
 }

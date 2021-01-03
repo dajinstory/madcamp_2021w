@@ -25,9 +25,10 @@ class PermissionActivity: AppCompatActivity() {
         //setContentView(R.layout.permission_activity)
 
         val permissionList = arrayOf(
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.READ_CONTACTS,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_CONTACTS,
+                Manifest.permission.WRITE_CONTACTS
         )
 
         if (checkPermission(permissionList).isEmpty()
@@ -59,6 +60,7 @@ class PermissionActivity: AppCompatActivity() {
     private fun startMainActivity(){
         val intent: Intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     private fun requestRuntimePermissions(permissions: Array<String>) {
