@@ -21,19 +21,21 @@ class RecordCursorAdapter(private val context : Context, cursor: Cursor)
     class ViewHolder constructor(view: View) :
         RecyclerView.ViewHolder(view) {
         val _view: View
+        var rank: TextView? = null
         val name: TextView
         val time: TextView
         val score: TextView
 
         fun setItem(item: Record, position: Int) {
-            // image.?? = item?.image ?: "default.png"
+            rank?.text = (position+1).toString()
             name.text = item?.name ?: "None"
-            time.text = item?.name ?: "None"
-            score.text = item?.name ?: "None"
+            time.text = item?.score.toString() ?: "None"
+            score.text = item?.time.toString() ?: "None"
         }
 
         init {
             _view = view
+            rank = view.findViewById(R.id.record_rank)
             name = view.findViewById(R.id.record_name)
             time = view.findViewById(R.id.record_time)
             score = view.findViewById(R.id.record_score)

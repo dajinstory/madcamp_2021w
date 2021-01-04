@@ -15,8 +15,8 @@ class DBHelper(
         var sql : String = "CREATE TABLE if not exists LeaderBoard (" +
                 "_id integer primary key autoincrement," +
                 "name text,"+
-                "score text,"+
-                "time text);";
+                "score integer,"+
+                "time integer);";
 
         db.execSQL(sql)
     }

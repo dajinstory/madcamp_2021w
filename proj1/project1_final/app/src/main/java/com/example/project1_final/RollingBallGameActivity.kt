@@ -2,6 +2,7 @@ package com.example.project1_final
 
 import android.content.Context
 import android.content.Intent
+import android.database.Cursor
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Rect
@@ -18,6 +19,10 @@ import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.project1_final.adapter.RecordCursorAdapter
+import com.example.project1_final.model.Record
+import com.example.project1_final.model.RecordDatabase
 import kotlinx.android.synthetic.main.activity_rolling_ball_game.*
 import kotlin.math.sqrt
 import kotlin.random.Random.Default.nextFloat
@@ -68,8 +73,25 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
                     scoreText.text = "Score : ${gameView.score}"
                 }
                 else -> {
+
+                    // get result
+                    val record = Record()
+                    record.name = "New"
+                    record.score = 10000
+                    record.time = 1000
+
+                    // update database
+                    val recordDatabase = RecordDatabase.getInstance(applicationContext)
+                    recordDatabase?.insert(record)
+
+                    // update view
+                    records.layoutManager = LinearLayoutManager(applicationContext)
+                    records.adapter = RecordCursorAdapter(applicationContext, recordDatabase?.cursor!!)
+
                     restartButton.visibility = View.VISIBLE
                     quitButton.visibility = View.VISIBLE
+                    records.visibility = View.VISIBLE
+
                     gameView.invalidate()
                     heart1.setColorFilter(Color.BLACK)
                 }

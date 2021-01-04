@@ -9,8 +9,8 @@ class RecordDatabase {
     lateinit var cursor: Cursor
     lateinit var sqliteDB: SQLiteDatabase
 
-    fun selectTop30() : Cursor {
-        return sqliteDB?.query("LeaderBoard", null, null, null, null, null, null)
+    fun selectTopN() : Cursor {
+        return sqliteDB?.query("LeaderBoard", null, null, null, null, null, "score DESC", "12")
     }
 
     fun insert(record: Record){
@@ -20,7 +20,7 @@ class RecordDatabase {
         contentValues.put("time", record.time)
 
         sqliteDB?.insert("LeaderBoard", null, contentValues)
-        cursor = selectTop30()
+        cursor = selectTopN()
     }
 
     companion object {
@@ -32,14 +32,16 @@ class RecordDatabase {
 
                 val dbHelper = DBHelper(context, "LeaderBoard.db", null, 1)
                 INSTANCE?.sqliteDB = dbHelper.writableDatabase
-                INSTANCE?.cursor = INSTANCE?.selectTop30()!!
+                INSTANCE?.cursor = INSTANCE?.selectTopN()!!
 
                 if (INSTANCE?.cursor?.count == 0){
-                    val sample = Record()
-                    sample.name = "몰입캠프"
-                    sample.score = "100"
-                    sample.time = "100"
-                    INSTANCE?.insert(sample)
+                    for (i in 1..10){
+                        val sample = Record()
+                        sample.name = "USER"
+                        sample.score = i * 10
+                        sample.time = i * 10
+                        INSTANCE?.insert(sample)
+                    }
                 }
             }
             return INSTANCE

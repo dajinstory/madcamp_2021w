@@ -18,8 +18,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar" >
-        <!--        android:theme="@style/Theme.Project1_final">-->
+        android:theme="@style/Theme.Project1_final">
+
+<!--    android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar" >-->
 
         <activity android:name=".PermissionActivity" >
             <intent-filter>
