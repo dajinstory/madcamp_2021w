@@ -4,9 +4,12 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.PorterDuff
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import android.widget.ImageView
+import kotlinx.android.synthetic.main.rolling_ball_game_activity.view.*
 import kotlin.math.sqrt
 import kotlin.random.Random.Default.nextFloat
 
@@ -32,15 +35,13 @@ class GameView@JvmOverloads constructor(
     var life = 3
     var score = 0
 
-    var drawText = true
-
     var bulletList = mutableListOf<Bullet>()
 
     val textPaint:Paint = Paint().apply{
         isFilterBitmap = true
         isAntiAlias = true
         color = Color.WHITE
-        textSize = 100f
+        textSize = 80f
     }
 
 
@@ -67,19 +68,18 @@ class GameView@JvmOverloads constructor(
         canvas?.drawColor(bgColor)
         canvas?.drawCircle(posX, posY, 50f, paint)
 
-        if (drawText){
-            canvas?.drawText("Life : $life", 100f, 200f,
-                textPaint)
-        }
+
 
 
         for (bullet in bulletList){
             canvas?.drawCircle(bullet.posX, bullet.posY, 10f, if (bullet.good) goodbulletPaint else badbulletPaint)
-            bullet.posY += bullet.velocity
+            bullet.posY += 2*bullet.velocity
             if (sqrt((bullet.posX-posX)*(bullet.posX-posX)+(bullet.posY-posY)*(bullet.posY-posY))<60f){
                 if (bullet.good)
-                    life += 1
-                else life -= 1
+                    score += 1
+                else {
+                    life -= 1
+                }
             }
         }
 

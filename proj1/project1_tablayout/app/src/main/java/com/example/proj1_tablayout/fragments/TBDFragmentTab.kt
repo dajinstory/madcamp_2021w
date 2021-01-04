@@ -82,14 +82,15 @@ class TBDFragmentTab : Fragment(), SensorEventListener {
 
         gameView = ballWindow
 
-        ballWindow.drawText = false
-
-        ballWindow.viewTreeObserver.addOnGlobalLayoutListener {
-            val width = ballWindow.measuredWidth
-            val height = ballWindow.measuredHeight
-            ballWindow.screenMaxX = width.toFloat()
-            ballWindow.screenMaxY = height.toFloat()+50f
+        gameView.viewTreeObserver.addOnGlobalLayoutListener {
+            if (gameView != null){
+                val width = gameView.measuredWidth
+                val height = gameView.measuredHeight
+                gameView.screenMaxX = width.toFloat()
+                gameView.screenMaxY = height.toFloat()+50f
+            }
         }
+
 
         //handling aniamtion on button click
 
@@ -105,6 +106,7 @@ class TBDFragmentTab : Fragment(), SensorEventListener {
         super.onResume()
         sensorManager!!.registerListener(this, sensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL)
         mainHandler.post(updatePosition)
+
     }
 
     override fun onPause() {

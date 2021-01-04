@@ -40,18 +40,38 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
     lateinit var quitButton: Button
 
     private val updatePosition = object : Runnable {
-        override fun run() {
-            if (gameView.life <= 0){
-                restartButton.visibility = View.VISIBLE
-                quitButton.visibility = View.VISIBLE
+        fun normalUpdate(){
+            gameView.updateUserBall(a_x, a_y)
+
+            gameView.invalidate()
+
+            if (nextFloat()>0.99){
+                gameView.loadRandomBullet(nextInt(1,5))
             }
-            else{
-                gameView.updateUserBall(a_x, a_y)
-                gameView.invalidate()
-                if (nextFloat()>0.99){
-                    gameView.loadRandomBullet(nextInt(1,5))
+            mainHandler.postDelayed(this, 10)
+        }
+
+        override fun run() {
+            when (gameView.life) {
+                3 -> {
+                    normalUpdate()
+                    scoreText.text = "Score : ${gameView.score}"
                 }
-                mainHandler.postDelayed(this, 10)
+                2 -> {
+                    normalUpdate()
+                    heart3.setColorFilter(Color.BLACK)
+                    scoreText.text = "Score : ${gameView.score}"
+                }
+                1 -> {
+                    normalUpdate()
+                    scoreText.text = "Score : ${gameView.score}"
+                }
+                else -> {
+                    restartButton.visibility = View.VISIBLE
+                    quitButton.visibility = View.VISIBLE
+                    gameView.invalidate()
+                    heart1.setColorFilter(Color.BLACK)
+                }
             }
         }
     }
