@@ -35,13 +35,99 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0a864c8-6326-48aa-930d-3e613ffd63c9" name="Default Changelist" comment="" />
+    <list default="true" id="c0a864c8-6326-48aa-930d-3e613ffd63c9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/proguard-rules.pro" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/androidTest/java/com/example/project1_final/ExampleInstrumentedTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/java/com/example/project1_final/ContactActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/java/com/example/project1_final/MainActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/java/com/example/project1_final/OpenGalleryFolderActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/java/com/example/project1_final/PermissionActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/java/com/example/project1_final/ShowFullImageActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/java/com/example/project1_final/adapter/ContactCursorAdapter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/java/com/example/project1_final/adapter/CursorRecyclerViewAdapter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/java/com/example/project1_final/adapter/GalleryAdapter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/java/com/example/project1_final/adapter/InGalleryImageAdapter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/java/com/example/project1_final/adapter/PageAdapter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/java/com/example/project1_final/adapter/RecordCursorAdapter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/java/com/example/project1_final/fragments/ContactFragmentTab.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/java/com/example/project1_final/fragments/GalleryFragmentTab.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/java/com/example/project1_final/fragments/TBDFragmentTab.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/java/com/example/project1_final/model/Contact.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/java/com/example/project1_final/model/ContactDatabase.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/java/com/example/project1_final/model/DBHelper.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/java/com/example/project1_final/model/MediaFileData.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/java/com/example/project1_final/model/Record.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/java/com/example/project1_final/model/RecordDatabase.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/drawable/add.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/drawable/camera3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/drawable/default_photo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/drawable/edge.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/drawable/ic_launcher_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/drawable/phone.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/drawable/tab_color_selector.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/layout/activity_contact.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/layout/custom_tab_button.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/layout/folder_image_item.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/layout/fragment_contacts.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/layout/fragment_tab.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/layout/galleryfragment_tab.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/layout/image_item.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/layout/item_contact.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/layout/item_contact_attribute.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/layout/item_contact_detail.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/layout/opengalleryfolder_activity.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/layout/permission_activity.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/layout/show_full_image_activity.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/mipmap-hdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/mipmap-mdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/mipmap-xhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/values-night/themes.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/values/dimens.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/values/themes.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/main/res/xml/file_paths.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/app/src/test/java/com/example/project1_final/ExampleUnitTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/gradle.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1_final/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/app/proj1_tablayout.app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/proj1_tablayout.app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[Pixel_3a_API_30_x86]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[R39M10G7LCW]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -60,6 +146,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="ProjectId" id="1mNfWQQAK21cX61hLEsqITSangg" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -70,7 +157,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../project1_tablayout" />
   </component>
   <component name="RecentsManager">
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
@@ -198,9 +285,10 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2460" y="275" key="AndroidCreateResourceFileDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1609759677914" />
-    <state x="2384" y="278" key="FileChooserDialogImpl" timestamp="1609572969702">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="464" y="278" key="FileChooserDialogImpl" timestamp="1609776124523">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="464" y="278" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1609776124523" />
     <state x="2384" y="278" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1609572969702" />
     <state width="1876" height="297" key="GridCell.Tab.0.bottom" timestamp="1609770470060">
       <screen x="1920" y="0" width="1920" height="1040" />
