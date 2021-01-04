@@ -13,17 +13,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
-        android:id="@+id/tablayout"
+        android:id="@+id/tab_layout"
         android:layout_alignParentBottom="true"
         app:tabGravity="fill"
         app:tabMode="fixed"
-        android:background="#222222" />
+        app:tabIconTint="@drawable/tab_color_selector"/>
+<!--        android:background="#222222"-->
 
     <androidx.viewpager.widget.ViewPager
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/viewpager"
-        android:layout_above="@id/tablayout"
+        android:layout_above="@id/tab_layout"
         android:layout_centerInParent="true"
         tools:layout_editor_absoluteX="8dp" />
 

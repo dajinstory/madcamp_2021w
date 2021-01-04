@@ -4,17 +4,18 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.database.Cursor
+import android.net.Uri
+import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proj1_tablayout.ContactActivity
-import com.example.proj1_tablayout.MainActivity
 import com.example.proj1_tablayout.R
 import com.example.proj1_tablayout.model.Contact
+import kotlinx.android.synthetic.main.item_contact.view.*
 
 
 class ContactCursorAdapter(private val context : Context, cursor: Cursor)
@@ -37,6 +38,11 @@ class ContactCursorAdapter(private val context : Context, cursor: Cursor)
                 nextIntent.putExtra("operation", "edit")
                 nextIntent.putExtra("position", position)
                 (_view.context as Activity).startActivityForResult(nextIntent, requestCode)
+            }
+            itemView.contact_call.setOnClickListener {
+                val callIntent = Intent(Intent.ACTION_DIAL)
+                callIntent.data = Uri.parse("tel:"+item.phoneNumber)
+                (_view.context as Activity).startActivityForResult(callIntent, 0)
             }
         }
 

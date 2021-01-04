@@ -9,7 +9,6 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proj1_tablayout.model.Contact
-import com.example.proj1_tablayout.model.ContactDatabase
 import kotlinx.android.synthetic.main.activity_contact.*
 import kotlinx.android.synthetic.main.item_contact_attribute.view.*
 import kotlinx.android.synthetic.main.item_contact_detail.view.*

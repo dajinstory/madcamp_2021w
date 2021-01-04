@@ -1,8 +1,9 @@
 package com.example.proj1_tablayout
 
-import android.R.attr
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,9 @@ import com.example.proj1_tablayout.adapter.PageAdapter
 import com.example.proj1_tablayout.fragments.ContactFragmentTab
 import com.example.proj1_tablayout.fragments.GalleryFragmentTab
 import com.example.proj1_tablayout.fragments.TBDFragmentTab
+import com.example.proj1_tablayout.model.RecordDatabase
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.custom_tab_button.view.*
 
@@ -37,13 +41,24 @@ class MainActivity : AppCompatActivity() {
         adapter?.addItems(tbdFragment)
 
         viewpager.adapter = adapter
-        tablayout.setupWithViewPager(viewpager)
+        tab_layout.setupWithViewPager(viewpager)
 
-        tablayout.getTabAt(0)?.setCustomView(createView("Contact"))
-        tablayout.getTabAt(1)?.setCustomView(createView("Gallery"))
-        tablayout.getTabAt(2)?.setCustomView(createView("TBD"))
+        tab_layout.getTabAt(0)?.setCustomView(createView("Contact"))
+        tab_layout.getTabAt(1)?.setCustomView(createView("Gallery"))
+        tab_layout.getTabAt(2)?.setCustomView(createView("TBD"))
 
-    }
+        tab_layout.setSelectedTabIndicatorColor(Color.parseColor("#2222FF"))
+        tab_layout.addOnTabSelectedListener(object : OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                tab_layout.getTabAt(0)?.getIcon()?.setColorFilter(resources.getColor(android.R.color.black), PorterDuff.Mode.SRC_IN)
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {
+                tab_layout.getTabAt(2)?.getIcon()?.setColorFilter(resources.getColor(android.R.color.black), PorterDuff.Mode.SRC_IN)
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab) {}
+        })    }
 
 
     private fun createView(tabName: String): View {
@@ -53,14 +68,18 @@ class MainActivity : AppCompatActivity() {
         when (tabName){
             "Contact" -> {
                 tabView.tab_logo.setImageResource(android.R.drawable.ic_menu_call)
+                //tabView.tab_logo.setImageResource(R.drawable.phone)
+                //tabView.tab_logo.setColorFilter(Color.BLACK)
                 return tabView
             }
             "Gallery" -> {
                 tabView.tab_logo.setImageResource(android.R.drawable.ic_menu_gallery)
+                //tabView.tab_logo.setColorFilter(Color.BLACK)
                 return tabView
             }
             "TBD" -> {
                 tabView.tab_logo.setImageResource(android.R.drawable.ic_menu_camera)
+                //tabView.tab_logo.setColorFilter(Color.BLACK)
                 return tabView
             }
             else -> {
