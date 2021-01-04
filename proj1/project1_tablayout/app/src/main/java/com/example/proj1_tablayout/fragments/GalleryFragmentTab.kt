@@ -1,7 +1,11 @@
 package com.example.proj1_tablayout.fragments
 
+import android.app.Activity
+import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -10,7 +14,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proj1_tablayout.R
@@ -18,6 +26,7 @@ import com.example.proj1_tablayout.adapter.GalleryAdapter
 import com.example.proj1_tablayout.model.MediaFileData
 import kotlinx.android.synthetic.main.galleryfragment_tab.*
 import kotlinx.android.synthetic.main.galleryfragment_tab.view.*
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -35,10 +44,12 @@ class GalleryFragmentTab : Fragment() {
         return inflater.inflate(R.layout.galleryfragment_tab,container,false)
     }
 
+    lateinit var ImageDataset: MutableList<MediaFileData>
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val ImageDataset = getFileList(requireContext(), MediaStoreFileType.IMAGE)
+        ImageDataset = getFileList(requireContext(), MediaStoreFileType.IMAGE) as MutableList<MediaFileData>
 
         val folderDataset = mutableListOf<MediaFileData>()
         val countImages = mutableListOf<Int>()
@@ -60,13 +71,7 @@ class GalleryFragmentTab : Fragment() {
 
 
         camerafab.setOnClickListener {
-            dispatchTakePictureIntent()
-            createImageFile()
-            Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE).also { mediaScanIntent ->
-            val f = File(currentPhotoPath)
-            mediaScanIntent.data = Uri.fromFile(f)
-            context!!.sendBroadcast(mediaScanIntent)
-            }
+            takePicture()
         }
 
         val recyclerView: RecyclerView = view.gallery
@@ -76,33 +81,37 @@ class GalleryFragmentTab : Fragment() {
 
     }
 
+
     val REQUEST_TAKE_PHOTO = 1
 
-    val REQUEST_IMAGE_CAPTURE = 1
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode == RESULT_OK) {
 
-    private fun dispatchTakePictureIntent() {
-        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
-            takePictureIntent.resolveActivity(context!!.packageManager)?.also {
-                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+            if (requestCode == REQUEST_TAKE_PHOTO) {
+                var bundle: Bundle? = data?.getExtras()
+                var bitmap: Bitmap = bundle?.get("data") as Bitmap
+                var changedUri: Uri = BitmapToUri(this.requireContext(), bitmap)
+                //ImageDataset.add(MediaFileData(changedUri))
+                //gallery.setImageBitmap(bitmap)
             }
+            refreshFragment(this, activity!!.supportFragmentManager)
         }
     }
-
-    lateinit var currentPhotoPath: String
-
-    @Throws(IOException::class)
-    private fun createImageFile(): File {
-        // Create an image file name
-        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        val storageDir: File = context!!.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
-        return File.createTempFile(
-            "JPEG_${timeStamp}_", /* prefix */
-            ".jpg", /* suffix */
-            storageDir /* directory */
-        ).apply {
-            // Save a file: path for use with ACTION_VIEW intents
-            currentPhotoPath = absolutePath
-        }
+    fun BitmapToUri(context: Context, bitmap: Bitmap): Uri {
+        var bytes =  ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100, bytes)
+        val path = MediaStore.Images.Media.insertImage(context.contentResolver, bitmap, "Title", null)
+        return Uri.parse(path.toString())
+    }
+    private fun takePicture() {
+        //카메라 앱 실행
+        var capture = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(capture, REQUEST_TAKE_PHOTO)
+    }
+    fun refreshFragment(fragment: Fragment, fragmentManager: FragmentManager){
+        var ft: FragmentTransaction = fragmentManager.beginTransaction()
+        ft.detach(fragment).attach(fragment).commit()
     }
 
     // return MediaFileData which contains id, dateTaken, displayName, uri

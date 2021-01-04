@@ -59,6 +59,7 @@ class PermissionActivity: AppCompatActivity() {
     private fun startMainActivity(){
         val intent: Intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     private fun requestRuntimePermissions(permissions: Array<String>) {

@@ -8,17 +8,24 @@
     >
 
 
-    <ImageButton
+    <FrameLayout
         app:layout_constraintDimensionRatio="1:1"
-        android:id="@+id/imageButton"
-
+        android:id="@+id/ballWindowFrame"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/camera2" />
+        android:orientation="vertical"
+        android:layout_margin="30dp"
+        
+        >
+        <com.example.proj1_tablayout.GameView
+            android:id="@+id/ballWindow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </FrameLayout>
 
     <Button
         android:text="Start!"

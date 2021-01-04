@@ -1,7 +1,10 @@
 package com.example.proj1_tablayout
 
 import android.content.Context
+import android.content.Intent
+import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Rect
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -9,12 +12,16 @@ import android.hardware.SensorManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.widget.Toast
+import android.view.Surface
+import android.view.SurfaceHolder
+import android.view.View
+import android.widget.Button
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.rolling_ball_game_activity.*
-import kotlin.math.floor
 import kotlin.math.sqrt
-import kotlin.random.Random
+import kotlin.random.Random.Default.nextFloat
+import kotlin.random.Random.Default.nextInt
 
 class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
 
@@ -29,11 +36,23 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
     lateinit var mainHandler: Handler
     lateinit var gameView: GameView
 
+    lateinit var restartButton: Button
+    lateinit var quitButton: Button
+
     private val updatePosition = object : Runnable {
         override fun run() {
-            gameView.update(a_x, a_y)
-            gameView.invalidate()
-            mainHandler.postDelayed(this, 10)
+            if (gameView.life <= 0){
+                restartButton.visibility = View.VISIBLE
+                quitButton.visibility = View.VISIBLE
+            }
+            else{
+                gameView.updateUserBall(a_x, a_y)
+                gameView.invalidate()
+                if (nextFloat()>0.99){
+                    gameView.loadRandomBullet(nextInt(1,5))
+                }
+                mainHandler.postDelayed(this, 10)
+            }
         }
     }
 
@@ -58,27 +77,6 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
 
     }
 
-//    private fun getAccelerometer(event: SensorEvent) {
-//        // Movement
-//        val xVal = event.values[0]
-//        val yVal = event.values[1]
-//        val zVal = event.values[2]
-////        textView2.text = "X Value: ".plus(xVal.toString())
-////        textView3.text = "Y Value: ".plus(yVal.toString())
-////        textView4.text = "Z Value: ".plus(zVal.toString())
-////
-////        val accelerationSquareRoot = (xVal * xVal + yVal * yVal + zVal * zVal) / (SensorManager.GRAVITY_EARTH * SensorManager.GRAVITY_EARTH)
-////
-////        if (accelerationSquareRoot >= 3) {
-////            Toast.makeText(this, "Device was shuffled", Toast.LENGTH_SHORT).show()
-////            if (color) {
-////                rollingballframe.setBackgroundColor(0x000000)
-////            } else {
-////                rollingballframe.setBackgroundColor(Color.YELLOW)
-////            }
-////            color = !color
-////        }
-//    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,9 +85,22 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
         //val gameView = GameView(this)
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
-        gameView = GameView(this)
+        setContentView(R.layout.rolling_ball_game_activity)
+        gameView = findViewById(R.id.gameView)
 
-        setContentView(gameView)
+        quitButton = quit
+        restartButton = restart
+
+        restartButton.setOnClickListener {
+            finish()
+            overridePendingTransition(0,0)
+            startActivity(Intent(this, RollingBallGameActivity::class.java))
+            overridePendingTransition(0,0)
+        }
+
+        quitButton.setOnClickListener {
+            finish()
+        }
 
         mainHandler = Handler(Looper.getMainLooper())
 
@@ -106,4 +117,5 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
         sensorManager!!.unregisterListener(this)
         mainHandler.removeCallbacks(updatePosition)
     }
+
 }
