@@ -1,14 +1,14 @@
 package com.example.proj1_tablayout
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.PorterDuff
+import android.graphics.*
+import android.os.Build
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageView
+import androidx.annotation.RequiresApi
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import kotlinx.android.synthetic.main.rolling_ball_game_activity.view.*
 import kotlin.math.sqrt
 import kotlin.random.Random.Default.nextFloat
@@ -36,13 +36,15 @@ class GameView@JvmOverloads constructor(
     var score = 0
 
     var bulletList = mutableListOf<Bullet>()
+    //@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    //val airplane = VectorDrawableCompat.create(getContext().getResources(), R.drawable.airplane, null).apply { setBounds() }
 
-    val textPaint:Paint = Paint().apply{
-        isFilterBitmap = true
-        isAntiAlias = true
-        color = Color.WHITE
-        textSize = 80f
-    }
+//    val textPaint:Paint = Paint().apply{
+//        isFilterBitmap = true
+//        isAntiAlias = true
+//        color = Color.WHITE
+//        textSize = 80f
+//    }
 
 
     init {
@@ -65,10 +67,8 @@ class GameView@JvmOverloads constructor(
 
     override fun draw(canvas: Canvas?) {
         super.draw(canvas)
-        canvas?.drawColor(bgColor)
+        //canvas?.drawColor(bgColor)
         canvas?.drawCircle(posX, posY, 50f, paint)
-
-
 
 
         for (bullet in bulletList){

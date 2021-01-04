@@ -27,7 +27,7 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
 
     private var sensorManager: SensorManager? = null
 
-    private val colorList = mutableListOf(Color.MAGENTA, Color.GREEN, Color.DKGRAY, Color.CYAN)
+    //private val colorList = mutableListOf(Color.MAGENTA, Color.GREEN, Color.DKGRAY, Color.CYAN)
 
     private var a_x:Float = 0f
     private var a_y:Float = 0f
@@ -64,6 +64,7 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
                 }
                 1 -> {
                     normalUpdate()
+                    heart2.setColorFilter(Color.BLACK)
                     scoreText.text = "Score : ${gameView.score}"
                 }
                 else -> {
@@ -82,13 +83,13 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
             a_y = event.values[1]
             a_z = event.values[2]
 
-            val accel_magnitude = sqrt(a_x*a_x + a_y*a_y + a_z*a_z)/9.8
-
-            if (accel_magnitude>2.5){
-                colorList.shuffle()
-                gameView.bgColor = colorList[0]
-                gameView.invalidate()
-            }
+//            val accel_magnitude = sqrt(a_x*a_x + a_y*a_y + a_z*a_z)/9.8
+//
+//            if (accel_magnitude>2.5){
+//                colorList.shuffle()
+//                gameView.bgColor = colorList[0]
+//                gameView.invalidate()
+//            }
 
         }
     }

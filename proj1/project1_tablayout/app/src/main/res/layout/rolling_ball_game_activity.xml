@@ -8,11 +8,27 @@
     android:layout_height="match_parent"
     >
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:scaleX="1.5"
+        android:src="@drawable/asphalt_road" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
 
     <com.example.proj1_tablayout.GameView
         android:id="@+id/gameView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 
     <Button
@@ -80,6 +96,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:text="Score : 0"
         android:textSize="30dp"
+        android:alpha="1"
         android:layout_marginLeft="10dp"/>
 
 
