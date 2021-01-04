@@ -23,25 +23,11 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.custom_tab_button.view.*
 
 class MainActivity : AppCompatActivity() {
-    companion object {
-        const val TAG = "MainActivity"
-        const val PERMISSION_REQUEST_CODE = 1001
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED &&
-            ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_CONTACTS)== PackageManager.PERMISSION_GRANTED
-                ){
-            Toast.makeText(this, "permission granted", Toast.LENGTH_SHORT).show()
-        }
-        else{
-            requestRuntimePermissions()
-        }
 
         val contactFragment = ContactFragmentTab()
         contactFragment.name = "Contact"
@@ -64,81 +50,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun requestRuntimePermissions() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            // Don't need to request
-            // It's supported in devices running VERSION_CODES.M or higher
-            return
-        }
 
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED &&
-            ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_CONTACTS)== PackageManager.PERMISSION_GRANTED
-        ) {
-            showDialog("Permission granted")
-        } else {
-            requestPermissions(
-                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.READ_CONTACTS),
-                PERMISSION_REQUEST_CODE)
-        }
-    }
 
-    @RequiresApi(Build.VERSION_CODES.M)
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>,
-                                            grantResults: IntArray) {
-        when (requestCode) {
-            PERMISSION_REQUEST_CODE -> {
-                if (grantResults.isEmpty()) {
-                    throw RuntimeException("Empty permission result")
-                }
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    showDialog("Permission granted")
-                } else {
-                    if (shouldShowRequestPermissionRationale(
-                            Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                        Log.d(TAG, "User declined, but i can still ask for more")
-                        requestPermissions(
-                            arrayOf(
-                                Manifest.permission.READ_EXTERNAL_STORAGE,
-                                Manifest.permission.READ_CONTACTS),
-                            PERMISSION_REQUEST_CODE)
-                    } else {
-                        Log.d(TAG, "User declined and i can't ask")
-                        showDialogToGetPermission()
-                    }
-                }
-            }
-        }
-    }
-
-    private fun showDialog(msg: String) {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Dialog")
-            .setMessage(msg)
-        val dialog = builder.create()
-        dialog.show()
-    }
-
-    private fun showDialogToGetPermission() {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Permisisons request")
-            .setMessage("We need the location permission for some reason. " +
-                    "You need to move on Settings to grant some permissions")
-        builder.setPositiveButton("OK") { dialogInterface, i ->
-            val intent = Intent(
-                Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                Uri.fromParts("package", packageName, null))
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-        }
-        builder.setNegativeButton("Later") { dialogInterface, i ->
-            // ignore
-        }
-        val dialog = builder.create()
-        dialog.show()
-    }
 
     private fun createView(tabName: String): View {
         var tabView = LayoutInflater.from(this).inflate(R.layout.custom_tab_button, null)
