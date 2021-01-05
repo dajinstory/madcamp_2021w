@@ -3,6 +3,7 @@ package com.example.project1_final
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.ColorFilter
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -120,7 +121,8 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
 
     }
 
-    val yellow = Color.parseInt("#FF9800")
+    val yellow = Color.parseColor("#FF9800")
+    val red = Color.parseColor("#F6412D")
 
 
     private val updatePosition = object : Runnable {
@@ -142,18 +144,27 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
 
         override fun run() {
             timer ++
-            if (timer.rem(1000)==0) {
+
+            if (timer.rem(500)==0) {
                 gameView.speed += 0.5f
-                num_bullet = num_bullet+0.3f
                 val level=((gameView.speed-1)*2 +1).toInt()
+                num_bullet = num_bullet+0.3f
                 levelText.text = "Level ${level}"
+                if (!gameView.isFever) rollingballframe.setBackgroundColor(colorList[(level-1).rem(colorList.size)])
+            }
+
+            val level=((gameView.speed-1)*2 +1).toInt()
+
+            if (gameView.gage == gameView.gageMax){
+                feverBtn.setColorFilter(red)
+                feverBtn.setBackgroundColor(yellow)
+            }
+
+            if (gameView.feverTime == 0 && gameView.isFever){
+                gameView.isFever = false
                 rollingballframe.setBackgroundColor(colorList[(level-1).rem(colorList.size)])
             }
 
-            if(gameView.gage == gameView.gageMax){
-                feverBtn.setBackgroundColor(yellow)
-            }
-            else feverBtn.setBackgroundColor(Color.GRAY)
 
 
             when (gameView.life) {
@@ -253,6 +264,17 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
                 freezeTime = 400
                 gameView.num_freeze -= 1
                 freezeText.text = gameView.num_freeze.toString()
+            }
+        }
+
+        feverBtn.setOnClickListener {
+            if (gameView.gage == gameView.gageMax){
+                gameView.feverTime = 500
+                gameView.isFever = true
+                gameView.gage = 0f
+                rollingballframe.setBackgroundColor(yellow)
+                feverBtn.setColorFilter(Color.BLACK)
+                feverBtn.setBackgroundColor(Color.GRAY)
             }
         }
 

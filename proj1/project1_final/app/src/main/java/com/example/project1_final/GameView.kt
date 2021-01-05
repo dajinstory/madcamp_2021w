@@ -44,6 +44,9 @@ class GameView@JvmOverloads constructor(
 
     var speed:Float = 1f
 
+    var feverTime = 0
+    var isFever = false
+
     //@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     //val airplane = VectorDrawableCompat.create(getContext().getResources(), R.drawable.airplane, null).apply { setBounds() }
 
@@ -56,8 +59,6 @@ class GameView@JvmOverloads constructor(
 
 
     init {
-
-
         posX = 500f
         posY = 600f
 
@@ -97,6 +98,16 @@ class GameView@JvmOverloads constructor(
 //        color = Color.parseColor("#50bcdf")
 //    }
 
+    val feverbulletpaint: Paint = Paint().apply {
+        isFilterBitmap = true
+        isAntiAlias = true
+        color = Color.parseColor("#FFEC19")
+    }
+    val feverCharacterPaint: Paint = Paint().apply {
+        isFilterBitmap = true
+        isAntiAlias = true
+        color = Color.parseColor("#F6412D")
+    }
 
 
     var gage = 0f
@@ -108,23 +119,40 @@ class GameView@JvmOverloads constructor(
         super.draw(canvas)
         //canvas?.drawColor(bgColor)
         canvas?.drawRoundRect(510f, 1650f, 940f, 1750f,35f, 35f, blackPaint)
-        canvas?.drawRoundRect(520f, 1660f, 520f+410f*(gage/gageMax), 1740f,30f, 30f, goodbulletPaint)
+        canvas?.drawRoundRect(520f, 1660f, 520f+410f*(gage/gageMax), 1740f,30f, 30f, feverbulletpaint)
         when (character){
             0 -> {
-                canvas?.drawCircle(posX, posY, 50f, paint)
-                for (bullet in bulletList){
-                    canvas?.drawCircle(bullet.posX, bullet.posY, 25f, if (bullet.good) goodbulletPaint else badbulletPaint)
-                    if (!bulletfrozen){
-                        bullet.posY += bullet.velocity
-                    }
 
-                    if (sqrt((bullet.posX-posX)*(bullet.posX-posX)+(bullet.posY-posY)*(bullet.posY-posY))<75f){
-                        if (bullet.good){
-                            score += 1
-                            gage = min(gage+1f,gageMax)
+                if (isFever){
+                    canvas?.drawCircle(posX, posY, 50f, feverCharacterPaint)
+                    for (bullet in bulletList){
+                        canvas?.drawCircle(bullet.posX, bullet.posY, 25f, feverbulletpaint)
+                        if (!bulletfrozen){
+                            bullet.posY += bullet.velocity
                         }
-                        else {
-                            life -= 1
+
+                        if (sqrt((bullet.posX-posX)*(bullet.posX-posX)+(bullet.posY-posY)*(bullet.posY-posY))<75f){
+                            score += 3
+                        }
+                    }
+                    feverTime -= 1
+                }
+                else{
+                    canvas?.drawCircle(posX, posY, 50f, paint)
+                    for (bullet in bulletList){
+                        canvas?.drawCircle(bullet.posX, bullet.posY, 25f, if (bullet.good) goodbulletPaint else badbulletPaint)
+                        if (!bulletfrozen){
+                            bullet.posY += bullet.velocity
+                        }
+
+                        if (sqrt((bullet.posX-posX)*(bullet.posX-posX)+(bullet.posY-posY)*(bullet.posY-posY))<75f){
+                            if (bullet.good){
+                                score += 1
+                                gage = min(gage+1f,gageMax)
+                            }
+                            else {
+                                life -= 1
+                            }
                         }
                     }
                 }
@@ -142,10 +170,6 @@ class GameView@JvmOverloads constructor(
 
             }
             1->{
-                canvas?.drawArc(posX - 150f, posY-10f, posX+50f, posY+145f,220f,80f, false, paint)
-                canvas?.drawArc(posX - 50f, posY-10f, posX+150f, posY+145f,240f,80f, false, paint)
-                canvas?.drawOval(posX-20f, posY-75f, posX+20f, posY+75, paint)
-                canvas?.drawArc(posX-30f, posY+65f, posX+30f, posY+125,180f,180f, false, paint)
 
                 val checkBulletinHitmap: (Bullet) -> Boolean = {bullet ->
                     ((bullet.posX<(posX+20) && bullet.posX>(posX-20))
@@ -153,20 +177,46 @@ class GameView@JvmOverloads constructor(
                             ||((bullet.posX<(posX+150f) && bullet.posX>(posX-150f))
                             && (bullet.posY<(posY+8.5f) && bullet.posY>(posY-10f)))}
 
+                if (isFever){
+                    canvas?.drawArc(posX - 150f, posY-10f, posX+50f, posY+145f,220f,80f, false, feverCharacterPaint)
+                    canvas?.drawArc(posX - 50f, posY-10f, posX+150f, posY+145f,240f,80f, false, feverCharacterPaint)
+                    canvas?.drawOval(posX-20f, posY-75f, posX+20f, posY+75, feverCharacterPaint)
+                    canvas?.drawArc(posX-30f, posY+65f, posX+30f, posY+125,180f,180f, false, feverCharacterPaint)
 
-                for (bullet in bulletList){
-                    canvas?.drawCircle(bullet.posX, bullet.posY, 25f, if (bullet.good) goodbulletPaint else badbulletPaint)
-                    if (!bulletfrozen){
-                        bullet.posY += bullet.velocity
+                    for (bullet in bulletList){
+                        canvas?.drawCircle(bullet.posX, bullet.posY, 25f, feverbulletpaint)
+                        if (!bulletfrozen){
+                            bullet.posY += bullet.velocity
+                        }
+                        if (checkBulletinHitmap(bullet)){
+                            score += 3
+                        }
                     }
-                    if (checkBulletinHitmap(bullet)){
-                        if (bullet.good)
-                            score += 1
-                        else {
-                            life -= 1
+                    feverTime -= 1
+                }
+                else{
+                    canvas?.drawArc(posX - 150f, posY-10f, posX+50f, posY+145f,220f,80f, false, paint)
+                    canvas?.drawArc(posX - 50f, posY-10f, posX+150f, posY+145f,240f,80f, false, paint)
+                    canvas?.drawOval(posX-20f, posY-75f, posX+20f, posY+75, paint)
+                    canvas?.drawArc(posX-30f, posY+65f, posX+30f, posY+125,180f,180f, false, paint)
+
+                    for (bullet in bulletList){
+                        canvas?.drawCircle(bullet.posX, bullet.posY, 25f, if (bullet.good) goodbulletPaint else badbulletPaint)
+                        if (!bulletfrozen){
+                            bullet.posY += bullet.velocity
+                        }
+                        if (checkBulletinHitmap(bullet)){
+                            if (bullet.good){
+                                score += 1
+                                gage = min(gage+1f,gageMax)
+                            }
+                            else {
+                                life -= 1
+                            }
                         }
                     }
                 }
+
 
                 if (bombtrue){
                     score += bulletList.size
