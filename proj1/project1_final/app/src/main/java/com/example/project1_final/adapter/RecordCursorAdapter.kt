@@ -29,8 +29,8 @@ class RecordCursorAdapter(private val context : Context, cursor: Cursor)
         fun setItem(item: Record, position: Int) {
             rank?.text = (position+1).toString()
             name.text = item?.name ?: "None"
-            time.text = item?.score.toString() ?: "None"
-            score.text = item?.time.toString() ?: "None"
+            score.text = item?.score.toString() ?: "None"
+            time.text = "${(item?.time)/1000/(60)}:${(item?.time)/1000.rem(60)}:${item?.time.rem(1000)}" ?: "None"
         }
 
         init {
@@ -54,6 +54,10 @@ class RecordCursorAdapter(private val context : Context, cursor: Cursor)
 
     override fun getItemCount(): Int {
         return cursor?.count ?: 0
+    }
+
+    private fun millisecFormatter(millisec: Int){
+        "${millisec/1000} : ${millisec.rem(1000)}"
     }
 
 

@@ -13,14 +13,12 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import com.example.project1_final.GameView
 import com.example.project1_final.R
 import com.example.project1_final.RollingBallGameActivity
 import kotlinx.android.synthetic.main.fragment_game.*
 import kotlin.math.sqrt
-import kotlin.random.Random
 
 
 class TBDFragmentTab : Fragment(), SensorEventListener {
@@ -38,11 +36,9 @@ class TBDFragmentTab : Fragment(), SensorEventListener {
 
     private val updatePosition = object : Runnable {
         override fun run() {
-
-            gameView.updateUserBall(a_x, a_y)
+            gameView.updateCharacter(a_x, a_y)
             gameView.invalidate()
             mainHandler.postDelayed(this, 10)
-
         }
     }
 
@@ -72,7 +68,7 @@ class TBDFragmentTab : Fragment(), SensorEventListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        sensorManager = context!!.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        sensorManager = requireContext().getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
         return inflater.inflate(R.layout.fragment_game,container,false)
     }

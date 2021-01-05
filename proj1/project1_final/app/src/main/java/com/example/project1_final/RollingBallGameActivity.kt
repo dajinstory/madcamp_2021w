@@ -2,10 +2,7 @@ package com.example.project1_final
 
 import android.content.Context
 import android.content.Intent
-import android.database.Cursor
-import android.graphics.Canvas
 import android.graphics.Color
-import android.graphics.Rect
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -13,10 +10,9 @@ import android.hardware.SensorManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.Surface
-import android.view.SurfaceHolder
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,9 +20,9 @@ import com.example.project1_final.adapter.RecordCursorAdapter
 import com.example.project1_final.model.Record
 import com.example.project1_final.model.RecordDatabase
 import kotlinx.android.synthetic.main.activity_rolling_ball_game.*
-import kotlin.math.sqrt
 import kotlin.random.Random.Default.nextFloat
 import kotlin.random.Random.Default.nextInt
+
 
 class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
 
@@ -44,14 +40,81 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
     lateinit var restartButton: Button
     lateinit var quitButton: Button
 
+    private var nameText = ""
+    private var startTime = System.currentTimeMillis()
+
+    private var freezeTime:Int = 0
+
+
+
+    private fun editName(){
+        val edittext = EditText(this)
+
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("AlertDialog Title")
+        builder.setMessage("AlertDialog Content")
+        builder.setView(edittext)
+        builder.setPositiveButton(
+            "OK"){ dialog, which ->
+            nameText = edittext.text.toString()
+            dialog.dismiss()
+            mainHandler.post(updateDBandShowLeadearboard)
+        }
+
+        builder.setNegativeButton(
+            "Cancel"
+        ) { dialog, which ->
+            nameText = "Unkown"
+            dialog.dismiss()
+            mainHandler.post(updateDBandShowLeadearboard)
+        }
+        builder.show()
+    }
+
+    private val endGame: Runnable = object:Runnable {
+        override fun run() {
+            editName()
+        }
+    }
+
+    private val updateDBandShowLeadearboard = Runnable {
+        val record = Record().apply{
+            name = nameText
+            score = gameView.score
+            time = (System.currentTimeMillis()-startTime).toInt()
+        }
+
+
+        // update database
+        val recordDatabase = RecordDatabase.getInstance(applicationContext)
+        recordDatabase?.insert(record)
+
+        // update view
+        records.layoutManager = LinearLayoutManager(applicationContext)
+        records.adapter = RecordCursorAdapter(
+            applicationContext,
+            recordDatabase?.cursor!!
+        )
+
+        records.visibility = View.VISIBLE
+
+
+    }
+
+
     private val updatePosition = object : Runnable {
         fun normalUpdate(){
-            gameView.updateUserBall(a_x, a_y)
+            if (freezeTime > 0){
+                gameView.bulletfrozen = true
+                freezeTime -= 1
+            }
+            else gameView.bulletfrozen = false
 
+            gameView.updateCharacter(a_x, a_y)
             gameView.invalidate()
 
-            if (nextFloat()>0.99){
-                gameView.loadRandomBullet(nextInt(1,5))
+            if (nextFloat()>0.99 && !gameView.bulletfrozen){
+                gameView.loadRandomBullet(nextInt(1, 5))
             }
             mainHandler.postDelayed(this, 10)
         }
@@ -73,27 +136,12 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
                     scoreText.text = "Score : ${gameView.score}"
                 }
                 else -> {
-
                     // get result
-                    val record = Record()
-                    record.name = "New"
-                    record.score = 10000
-                    record.time = 1000
-
-                    // update database
-                    val recordDatabase = RecordDatabase.getInstance(applicationContext)
-                    recordDatabase?.insert(record)
-
-                    // update view
-                    records.layoutManager = LinearLayoutManager(applicationContext)
-                    records.adapter = RecordCursorAdapter(applicationContext, recordDatabase?.cursor!!)
-
-                    restartButton.visibility = View.VISIBLE
-                    quitButton.visibility = View.VISIBLE
-                    records.visibility = View.VISIBLE
-
                     gameView.invalidate()
                     heart1.setColorFilter(Color.BLACK)
+                    restartButton.visibility = View.VISIBLE
+                    quitButton.visibility = View.VISIBLE
+                    runOnUiThread(endGame)
                 }
             }
         }
@@ -133,13 +181,29 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
 
         restartButton.setOnClickListener {
             finish()
-            overridePendingTransition(0,0)
+            overridePendingTransition(0, 0)
             startActivity(Intent(this, RollingBallGameActivity::class.java))
-            overridePendingTransition(0,0)
+            overridePendingTransition(0, 0)
         }
 
         quitButton.setOnClickListener {
             finish()
+        }
+
+        bombItem.setOnClickListener {
+            if (gameView.num_bomb > 0){
+                gameView.bombtrue = true
+                gameView.num_bomb -= 1
+                bombText.text = gameView.num_bomb.toString()
+            }
+        }
+
+        freezeItem.setOnClickListener {
+            if (gameView.num_freeze > 0){
+                freezeTime = 500
+                gameView.num_freeze -= 1
+                freezeText.text = gameView.num_freeze.toString()
+            }
         }
 
         mainHandler = Handler(Looper.getMainLooper())
@@ -148,7 +212,11 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
 
     override fun onResume() {
         super.onResume()
-        sensorManager!!.registerListener(this, sensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL)
+        sensorManager!!.registerListener(
+            this,
+            sensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+            SensorManager.SENSOR_DELAY_NORMAL
+        )
         mainHandler.post(updatePosition)
     }
 
@@ -157,4 +225,8 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
         sensorManager!!.unregisterListener(this)
         mainHandler.removeCallbacks(updatePosition)
     }
+
+
+
+
 }
