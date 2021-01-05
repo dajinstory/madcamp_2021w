@@ -57,15 +57,15 @@ class GameView@JvmOverloads constructor(
     init {
         paint.isFilterBitmap = true
         paint.isAntiAlias = true
-        paint.color = Color.YELLOW
+        paint.color = Color.parseColor("#50bcdf")
 
         goodbulletPaint.isFilterBitmap = true
         goodbulletPaint.isAntiAlias = true
-        goodbulletPaint.color = Color.BLUE
+        goodbulletPaint.color = Color.parseColor("#87ceeb")
 
         badbulletPaint.isFilterBitmap = true
         badbulletPaint.isAntiAlias = true
-        badbulletPaint.color = Color.CYAN
+        badbulletPaint.color = Color.parseColor("#4A412A")
 
         posX = 500f
         posY = 600f
@@ -90,12 +90,12 @@ class GameView@JvmOverloads constructor(
                 canvas?.drawCircle(posX, posY, 50f, paint)
 
                 for (bullet in bulletList){
-                    canvas?.drawCircle(bullet.posX, bullet.posY, 10f, if (bullet.good) goodbulletPaint else badbulletPaint)
+                    canvas?.drawCircle(bullet.posX, bullet.posY, 25f, if (bullet.good) goodbulletPaint else badbulletPaint)
                     if (!bulletfrozen){
                         bullet.posY += bullet.velocity
                     }
 
-                    if (sqrt((bullet.posX-posX)*(bullet.posX-posX)+(bullet.posY-posY)*(bullet.posY-posY))<60f){
+                    if (sqrt((bullet.posX-posX)*(bullet.posX-posX)+(bullet.posY-posY)*(bullet.posY-posY))<75f){
                         if (bullet.good)
                             score += 1
                         else {
@@ -111,7 +111,7 @@ class GameView@JvmOverloads constructor(
                 }
                 else{
                     bulletList = bulletList.filter{ bullet ->
-                        sqrt((bullet.posX-posX)*(bullet.posX-posX)+(bullet.posY-posY)*(bullet.posY-posY))>60f
+                        sqrt((bullet.posX-posX)*(bullet.posX-posX)+(bullet.posY-posY)*(bullet.posY-posY))>75f
                                 && bullet.posY<1920} as MutableList<Bullet>
                 }
 
@@ -130,7 +130,7 @@ class GameView@JvmOverloads constructor(
 
 
                 for (bullet in bulletList){
-                    canvas?.drawCircle(bullet.posX, bullet.posY, 10f, if (bullet.good) goodbulletPaint else badbulletPaint)
+                    canvas?.drawCircle(bullet.posX, bullet.posY, 25f, if (bullet.good) goodbulletPaint else badbulletPaint)
                     if (!bulletfrozen){
                         bullet.posY += bullet.velocity
                     }
@@ -238,8 +238,8 @@ class GameView@JvmOverloads constructor(
                     }
                 }
 
-                posX += 0.05f*v_x
-                posY += 0.05f*v_y
+                posX += 0.1f*v_x
+                posY += 0.1f*v_y
             }
         }
 
@@ -265,6 +265,6 @@ class Bullet(initX:Float, speed:Int){
 
     init{
         posX = initX
-        velocity = kotlin.math.min(speed*nextFloat()*3f, 0.5f)
+        velocity = speed*nextFloat()*4f
     }
 }
