@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import androidx.annotation.RequiresApi
+import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.sqrt
 import kotlin.random.Random.Default.nextFloat
@@ -16,7 +17,7 @@ class GameView@JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyle: Int = 0
 ) : View(context, attrs, defStyle){
-    val paint: Paint = Paint()
+
     var posX:Float
     var posY:Float
     var v_x: Float = 10f
@@ -28,8 +29,7 @@ class GameView@JvmOverloads constructor(
     var screenMaxX = 1080f
     var screenMaxY = 1920f
 
-    var goodbulletPaint:Paint = Paint()
-    var badbulletPaint: Paint = Paint()
+
     var life = 3
     var score = 0
     var character = 0
@@ -56,17 +56,7 @@ class GameView@JvmOverloads constructor(
 
 
     init {
-        paint.isFilterBitmap = true
-        paint.isAntiAlias = true
-        paint.color = Color.parseColor("#50bcdf")
 
-        goodbulletPaint.isFilterBitmap = true
-        goodbulletPaint.isAntiAlias = true
-        goodbulletPaint.color = Color.parseColor("#87ceeb")
-
-        badbulletPaint.isFilterBitmap = true
-        badbulletPaint.isAntiAlias = true
-        badbulletPaint.color = Color.parseColor("#4A412A")
 
         posX = 500f
         posY = 600f
@@ -81,15 +71,47 @@ class GameView@JvmOverloads constructor(
         }
     }
 
+    val blackPaint = Paint().apply{
+        isFilterBitmap = true
+        isAntiAlias = true
+        color = Color.BLACK
+    }
+    val goodbulletPaint:Paint = Paint().apply {
+        isFilterBitmap = true
+        isAntiAlias = true
+        color = Color.parseColor("#87ceeb")
+    }
+    val badbulletPaint: Paint = Paint().apply {
+        isFilterBitmap = true
+        isAntiAlias = true
+        color = Color.parseColor("#4A412A")
+    }
+    val paint: Paint = Paint().apply {
+        isFilterBitmap = true
+        isAntiAlias = true
+        color = Color.parseColor("#50bcdf")
+    }
+//    val gagePaint = Paint().apply {
+//        isFilterBitmap = true
+//        isAntiAlias = true
+//        color = Color.parseColor("#50bcdf")
+//    }
+
+
+
+    private var gage = 0f
+    private val gageMax = 5f
+
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun draw(canvas: Canvas?) {
         super.draw(canvas)
         //canvas?.drawColor(bgColor)
+        canvas?.drawRoundRect(510f, 1650f, 1050f, 1750f,35f, 35f, blackPaint)
+        canvas?.drawRoundRect(520f, 1660f, 520f+520f*(gage/gageMax), 1740f,30f, 30f, goodbulletPaint)
         when (character){
             0 -> {
                 canvas?.drawCircle(posX, posY, 50f, paint)
-
                 for (bullet in bulletList){
                     canvas?.drawCircle(bullet.posX, bullet.posY, 25f, if (bullet.good) goodbulletPaint else badbulletPaint)
                     if (!bulletfrozen){
@@ -97,8 +119,10 @@ class GameView@JvmOverloads constructor(
                     }
 
                     if (sqrt((bullet.posX-posX)*(bullet.posX-posX)+(bullet.posY-posY)*(bullet.posY-posY))<75f){
-                        if (bullet.good)
+                        if (bullet.good){
                             score += 1
+                            gage = min(gage+1f,gageMax)
+                        }
                         else {
                             life -= 1
                         }
