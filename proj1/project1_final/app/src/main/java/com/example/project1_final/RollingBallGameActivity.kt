@@ -30,7 +30,7 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
 
     private var sensorManager: SensorManager? = null
 
-    var difficulty = 1
+
 
     //private val colorList = mutableListOf(Color.MAGENTA, Color.GREEN, Color.DKGRAY, Color.CYAN)
 
@@ -123,12 +123,18 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
             gameView.invalidate()
 
             if (nextFloat()>0.99 && !gameView.bulletfrozen){
-                gameView.loadRandomBullet(nextInt(1, 5))
+                gameView.loadRandomBullet(nextInt(1, 3))
             }
             mainHandler.postDelayed(this, 10)
         }
 
         override fun run() {
+            timer ++
+            if (timer.rem(1000)==0) {
+                gameView.speed += 1
+                levelText.text = "Level ${gameView.speed}"
+            }
+
 
             when (gameView.life) {
                 3 -> {
@@ -202,7 +208,9 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
         restartButton.setOnClickListener {
             finish()
             overridePendingTransition(0, 0)
-            startActivity(Intent(this, RollingBallGameActivity::class.java))
+            val intent = Intent(this, RollingBallGameActivity::class.java)
+            intent.putExtra("character", gameView.character)
+            startActivity(intent)
             overridePendingTransition(0, 0)
         }
 
@@ -220,7 +228,7 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
 
         freezeItem.setOnClickListener {
             if (gameView.num_freeze > 0){
-                freezeTime = 500
+                freezeTime = 400
                 gameView.num_freeze -= 1
                 freezeText.text = gameView.num_freeze.toString()
             }
