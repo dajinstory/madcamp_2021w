@@ -30,8 +30,6 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
 
     private var sensorManager: SensorManager? = null
 
-
-
     //private val colorList = mutableListOf(Color.MAGENTA, Color.GREEN, Color.DKGRAY, Color.CYAN)
 
     private var a_x:Float = 0f
@@ -52,16 +50,27 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
 
     private var timer = 0
 
+    private var num_bullet = 5f
 
 
+    private val colorList = listOf<Int>(
+        Color.parseColor("#E1BEE7"),
+        Color.parseColor("#CE93D8"),
+        Color.parseColor("#BA68C8"),
+        Color.parseColor("#AB47BC"),
+        Color.parseColor("#9C27B0"),
+        Color.parseColor("#8E24AA"),
+        Color.parseColor("#7B1FA2"),
+        Color.parseColor("#6A1B9A"),
+        Color.parseColor("#4A148C"))
 
 
     private fun editName(){
         val edittext = EditText(this)
 
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("AlertDialog Title")
-        builder.setMessage("AlertDialog Content")
+        builder.setTitle("What's your name?")
+        builder.setMessage("Name for ranking. If you cancel, you're record will be stored as Unknown's record")
         builder.setView(edittext)
         builder.setPositiveButton(
             "OK"){ dialog, which ->
@@ -122,8 +131,8 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
             gameView.updateCharacter(a_x, a_y)
             gameView.invalidate()
 
-            if (nextFloat()>0.99 && !gameView.bulletfrozen){
-                gameView.loadRandomBullet(nextInt(1, 3))
+            if (nextFloat()>0.98 && !gameView.bulletfrozen){
+                gameView.loadRandomBullet(nextInt(1, num_bullet.toInt()))
             }
             mainHandler.postDelayed(this, 10)
         }
@@ -131,8 +140,11 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
         override fun run() {
             timer ++
             if (timer.rem(1000)==0) {
-                gameView.speed += 1
-                levelText.text = "Level ${gameView.speed}"
+                gameView.speed += 0.5f
+                num_bullet = num_bullet+0.3f
+                val level=((gameView.speed-1)*2 +1).toInt()
+                levelText.text = "Level ${level}"
+                rollingballframe.setBackgroundColor(colorList[(level-1).rem(colorList.size)])
             }
 
 
@@ -190,7 +202,9 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
         //val gameView = GameView(this)
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
+
         setContentView(R.layout.activity_rolling_ball_game)
+        rollingballframe.setBackgroundColor(Color.parseColor("#F3E5F5"))
         gameView = findViewById(R.id.gameView)
         gameView.character = intent.getIntExtra("character", -1)
         when(gameView.character){

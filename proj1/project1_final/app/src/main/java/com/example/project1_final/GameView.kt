@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import androidx.annotation.RequiresApi
+import kotlin.math.min
 import kotlin.math.sqrt
 import kotlin.random.Random.Default.nextFloat
 
@@ -41,7 +42,7 @@ class GameView@JvmOverloads constructor(
     var bulletfrozen = false
     var num_freeze = 3
 
-    var speed = 1
+    var speed:Float = 1f
 
     //@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     //val airplane = VectorDrawableCompat.create(getContext().getResources(), R.drawable.airplane, null).apply { setBounds() }
@@ -257,7 +258,7 @@ class GameView@JvmOverloads constructor(
 
 }
 
-class Bullet(initX:Float, speed:Int){
+class Bullet(initX:Float, speed:Float){
     val good = nextFloat()>0.5
     var posY:Float = 0f
     var posX:Float = -9999f
@@ -265,6 +266,6 @@ class Bullet(initX:Float, speed:Int){
 
     init{
         posX = initX
-        velocity = speed*nextFloat()*4f
+        velocity = min(speed*nextFloat()*5f + 2,speed*0.2f+2)
     }
 }

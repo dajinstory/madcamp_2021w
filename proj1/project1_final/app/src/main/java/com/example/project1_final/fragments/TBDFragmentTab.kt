@@ -96,9 +96,11 @@ class TBDFragmentTab : Fragment(), SensorEventListener {
             when(character){
                 0->{
                     gameView.friction_coef = 0.05f*9.8f
+                    characterImg.setImageDrawable(resources.getDrawable(R.drawable.ball))
                 }
                 1 -> {
                     gameView.friction_coef = 0.05f*9.8f*9
+                    characterImg.setImageDrawable(resources.getDrawable(R.drawable.airplane))
                 }
             }
         }
