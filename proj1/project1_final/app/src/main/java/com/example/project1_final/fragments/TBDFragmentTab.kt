@@ -72,7 +72,7 @@ class TBDFragmentTab : Fragment(), SensorEventListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        sensorManager = context!!.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        sensorManager = requireContext().getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
         return inflater.inflate(R.layout.fragment_game,container,false)
     }

@@ -18,7 +18,6 @@
         app:tabGravity="fill"
         app:tabMode="fixed"
         app:tabIconTint="@drawable/tab_color_selector"/>
-    <!--        android:background="#222222"-->
 
     <androidx.viewpager.widget.ViewPager
         android:layout_width="wrap_content"

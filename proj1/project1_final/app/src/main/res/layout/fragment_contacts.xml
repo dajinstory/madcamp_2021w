@@ -8,10 +8,10 @@
     tools:context=".MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:scrollbars="vertical"
         android:id="@+id/contacts"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scrollbars="vertical"
         tools:listitem="@layout/item_contact" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -20,8 +20,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         app:srcCompat="@drawable/add"
-        android:backgroundTint="#0F4C75"
-        android:tint="#7E9FB5"
+        android:background="@drawable/element_background"
+        app:tint="@color/item_background"
+        app:backgroundTint="@color/sig"
+
         app:fabSize="normal"
         app:borderWidth="0dp"
         android:layout_margin="20dp"/>

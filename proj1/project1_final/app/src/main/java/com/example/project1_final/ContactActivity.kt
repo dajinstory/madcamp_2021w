@@ -55,6 +55,7 @@ class ContactActivity : AppCompatActivity() {
             phoneNumber = contact.phoneNumber
             email = contact.email
             group = contact.group
+            save_button.text = "EDIT"
         }
 
         // view

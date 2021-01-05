@@ -21,6 +21,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="Save" />
+        android:backgroundTint="@color/item_background"
+        android:text="Add" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

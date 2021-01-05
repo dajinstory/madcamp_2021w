@@ -19,15 +19,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         app:srcCompat="@android:drawable/ic_menu_camera"
-        android:backgroundTint="#0F4C75"
-        android:tint="#FFFFFF"
+        android:background="@drawable/element_background"
+        app:tint="@color/item_background"
+        app:backgroundTint="@color/sig"
         app:fabSize="normal"
         app:borderWidth="0dp"
         android:layout_margin="20dp" />
-
-    <!--    <com.google.android.material.textview.MaterialTextView-->
-    <!--        android:id="@+id/textview"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"/>-->
 
 </FrameLayout>

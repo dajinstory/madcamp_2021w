@@ -20,8 +20,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project1_final">
 
-<!--    android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar" >-->
-
         <activity android:name=".PermissionActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
