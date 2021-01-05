@@ -13,14 +13,13 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import com.example.project1_final.GameView
 import com.example.project1_final.R
 import com.example.project1_final.RollingBallGameActivity
 import kotlinx.android.synthetic.main.fragment_game.*
+import kotlin.math.abs
 import kotlin.math.sqrt
-import kotlin.random.Random
 
 
 class TBDFragmentTab : Fragment(), SensorEventListener {
@@ -36,13 +35,13 @@ class TBDFragmentTab : Fragment(), SensorEventListener {
     lateinit var mainHandler: Handler
     lateinit var gameView: GameView
 
+    private var character = 0
+
     private val updatePosition = object : Runnable {
         override fun run() {
-
-            gameView.updateUserBall(a_x, a_y)
+            gameView.updateCharacter(a_x, a_y)
             gameView.invalidate()
             mainHandler.postDelayed(this, 10)
-
         }
     }
 
@@ -91,12 +90,29 @@ class TBDFragmentTab : Fragment(), SensorEventListener {
             }
         }
 
+        characterChangeBtn.setOnClickListener {
+            character = abs(character-1)
+            gameView.character = character
+            when(character){
+                0->{
+                    gameView.friction_coef = 0.05f*9.8f
+                }
+                1 -> {
+                    gameView.friction_coef = 0.05f*9.8f*9
+                }
+            }
+        }
+
 
         //handling aniamtion on button click
 
         gameStartBtn.setOnClickListener {
-            startActivity(Intent(context, RollingBallGameActivity::class.java))
+            val intent = Intent(context, RollingBallGameActivity::class.java)
+            intent.putExtra("character", character)
+            startActivity(intent)
         }
+
+
 
         mainHandler = Handler(Looper.getMainLooper())
 

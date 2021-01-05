@@ -34,15 +34,7 @@ class RecordDatabase {
                 INSTANCE?.sqliteDB = dbHelper.writableDatabase
                 INSTANCE?.cursor = INSTANCE?.selectTopN()!!
 
-                if (INSTANCE?.cursor?.count == 0){
-                    for (i in 1..10){
-                        val sample = Record()
-                        sample.name = "USER"
-                        sample.score = i * 10
-                        sample.time = i * 10
-                        INSTANCE?.insert(sample)
-                    }
-                }
+
             }
             return INSTANCE
         }
