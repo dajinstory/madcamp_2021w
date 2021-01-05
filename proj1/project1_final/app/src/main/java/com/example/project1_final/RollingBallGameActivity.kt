@@ -20,6 +20,8 @@ import com.example.project1_final.adapter.RecordCursorAdapter
 import com.example.project1_final.model.Record
 import com.example.project1_final.model.RecordDatabase
 import kotlinx.android.synthetic.main.activity_rolling_ball_game.*
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.random.Random.Default.nextFloat
 import kotlin.random.Random.Default.nextInt
 
@@ -41,9 +43,12 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
     lateinit var quitButton: Button
 
     private var nameText = ""
-    private var startTime = System.currentTimeMillis()
+    private var startTime: Date? = Date()
+    private var endTime: Date? = null
 
     private var freezeTime:Int = 0
+
+
 
 
 
@@ -81,7 +86,7 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
         val record = Record().apply{
             name = nameText
             score = gameView.score
-            time = (System.currentTimeMillis()-startTime).toInt()
+            time = (endTime!!.minutes - startTime!!.minutes)*60 + (endTime!!.seconds-startTime!!.seconds)
         }
 
 
@@ -136,6 +141,7 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
                     scoreText.text = "Score : ${gameView.score}"
                 }
                 else -> {
+                    endTime = Date()
                     // get result
                     gameView.invalidate()
                     heart1.setColorFilter(Color.BLACK)
@@ -175,6 +181,15 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
 
         setContentView(R.layout.activity_rolling_ball_game)
         gameView = findViewById(R.id.gameView)
+        gameView.character = intent.getIntExtra("character", -1)
+        when(gameView.character){
+            0->{
+                gameView.friction_coef = 0.05f*9.8f
+            }
+            1 -> {
+                gameView.friction_coef = 0.05f*9.8f*9
+            }
+        }
 
         quitButton = quit
         restartButton = restart

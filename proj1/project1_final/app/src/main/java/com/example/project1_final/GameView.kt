@@ -31,7 +31,7 @@ class GameView@JvmOverloads constructor(
     var badbulletPaint: Paint = Paint()
     var life = 3
     var score = 0
-    var character = 1
+    var character = 0
 
     var bulletList = mutableListOf<Bullet>()
 
@@ -64,8 +64,8 @@ class GameView@JvmOverloads constructor(
         badbulletPaint.isAntiAlias = true
         badbulletPaint.color = Color.CYAN
 
-        posX = 200f
-        posY = 200f
+        posX = 500f
+        posY = 600f
 
         when(character){
             0->{
@@ -129,7 +129,7 @@ class GameView@JvmOverloads constructor(
                 for (bullet in bulletList){
                     canvas?.drawCircle(bullet.posX, bullet.posY, 10f, if (bullet.good) goodbulletPaint else badbulletPaint)
                     if (!bulletfrozen){
-                        bullet.posY += 2*bullet.velocity
+                        bullet.posY += bullet.velocity
                     }
                     if (checkBulletinHitmap(bullet)){
                         if (bullet.good)
@@ -147,7 +147,7 @@ class GameView@JvmOverloads constructor(
                 }
                 else{
                     bulletList = bulletList.filter{ bullet ->
-                        sqrt((bullet.posX-posX)*(bullet.posX-posX)+(bullet.posY-posY)*(bullet.posY-posY))>60f
+                        checkBulletinHitmap(bullet)
                                 && bullet.posY<1920} as MutableList<Bullet>
                 }
             }
@@ -262,6 +262,6 @@ class Bullet(initX:Float){
 
     init{
         posX = initX
-        velocity = nextFloat()
+        velocity = kotlin.math.min(nextFloat()*3f, 0.5f)
     }
 }

@@ -30,7 +30,7 @@ class RecordCursorAdapter(private val context : Context, cursor: Cursor)
             rank?.text = (position+1).toString()
             name.text = item?.name ?: "None"
             score.text = item?.score.toString() ?: "None"
-            time.text = "${(item?.time)/1000/(60)}:${(item?.time)/1000.rem(60)}:${item?.time.rem(1000)}" ?: "None"
+            time.text = "${item?.time/60}:${(item?.time).rem(60)}" ?: "None"
         }
 
         init {

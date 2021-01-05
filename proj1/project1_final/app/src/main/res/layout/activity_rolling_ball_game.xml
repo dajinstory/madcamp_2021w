@@ -24,6 +24,7 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:scrollbars="vertical"
         android:id="@+id/records"
@@ -80,6 +81,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:text="Score : 0"
         android:textSize="30dp"
+        android:textStyle="bold"
         android:alpha="1"
         android:layout_marginLeft="10dp"/>
 

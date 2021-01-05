@@ -18,6 +18,7 @@ import com.example.project1_final.GameView
 import com.example.project1_final.R
 import com.example.project1_final.RollingBallGameActivity
 import kotlinx.android.synthetic.main.fragment_game.*
+import kotlin.math.abs
 import kotlin.math.sqrt
 
 
@@ -33,6 +34,8 @@ class TBDFragmentTab : Fragment(), SensorEventListener {
 
     lateinit var mainHandler: Handler
     lateinit var gameView: GameView
+
+    private var character = 0
 
     private val updatePosition = object : Runnable {
         override fun run() {
@@ -87,12 +90,29 @@ class TBDFragmentTab : Fragment(), SensorEventListener {
             }
         }
 
+        characterChangeBtn.setOnClickListener {
+            character = abs(character-1)
+            gameView.character = character
+            when(character){
+                0->{
+                    gameView.friction_coef = 0.05f*9.8f
+                }
+                1 -> {
+                    gameView.friction_coef = 0.05f*9.8f*9
+                }
+            }
+        }
+
 
         //handling aniamtion on button click
 
         gameStartBtn.setOnClickListener {
-            startActivity(Intent(context, RollingBallGameActivity::class.java))
+            val intent = Intent(context, RollingBallGameActivity::class.java)
+            intent.putExtra("character", character)
+            startActivity(intent)
         }
+
+
 
         mainHandler = Handler(Looper.getMainLooper())
 
