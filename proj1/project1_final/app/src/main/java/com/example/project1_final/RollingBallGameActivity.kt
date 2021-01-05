@@ -20,6 +20,7 @@ import com.example.project1_final.adapter.RecordCursorAdapter
 import com.example.project1_final.model.Record
 import com.example.project1_final.model.RecordDatabase
 import kotlinx.android.synthetic.main.activity_rolling_ball_game.*
+import java.lang.Integer.parseInt
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.random.Random.Default.nextFloat
@@ -119,6 +120,8 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
 
     }
 
+    val yellow = Color.parseInt("#FF9800")
+
 
     private val updatePosition = object : Runnable {
         fun normalUpdate(){
@@ -146,6 +149,11 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
                 levelText.text = "Level ${level}"
                 rollingballframe.setBackgroundColor(colorList[(level-1).rem(colorList.size)])
             }
+
+            if(gameView.gage == gameView.gageMax){
+                feverBtn.setBackgroundColor(yellow)
+            }
+            else feverBtn.setBackgroundColor(Color.GRAY)
 
 
             when (gameView.life) {

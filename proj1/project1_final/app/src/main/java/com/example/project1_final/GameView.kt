@@ -99,16 +99,16 @@ class GameView@JvmOverloads constructor(
 
 
 
-    private var gage = 0f
-    private val gageMax = 5f
+    var gage = 0f
+    val gageMax = 5f
 
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun draw(canvas: Canvas?) {
         super.draw(canvas)
         //canvas?.drawColor(bgColor)
-        canvas?.drawRoundRect(510f, 1650f, 1050f, 1750f,35f, 35f, blackPaint)
-        canvas?.drawRoundRect(520f, 1660f, 520f+520f*(gage/gageMax), 1740f,30f, 30f, goodbulletPaint)
+        canvas?.drawRoundRect(510f, 1650f, 940f, 1750f,35f, 35f, blackPaint)
+        canvas?.drawRoundRect(520f, 1660f, 520f+410f*(gage/gageMax), 1740f,30f, 30f, goodbulletPaint)
         when (character){
             0 -> {
                 canvas?.drawCircle(posX, posY, 50f, paint)
