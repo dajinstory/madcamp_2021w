@@ -17,7 +17,7 @@
         android:layout_alignParentBottom="true"
         app:tabGravity="fill"
         app:tabMode="fixed"
-        app:tabIconTint="@drawable/tab_color_selector"/>
+        android:background="?attr/colorPrimary"/>
 
     <androidx.viewpager.widget.ViewPager
         android:layout_width="wrap_content"

@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.project1_final.adapter.PageAdapter
 import com.example.project1_final.fragments.ContactFragmentTab
 import com.example.project1_final.fragments.GalleryFragmentTab
-import com.example.project1_final.fragments.TBDFragmentTab
+import com.example.project1_final.fragments.GameFragmentTab
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import kotlinx.android.synthetic.main.activity_main.*
@@ -31,8 +31,8 @@ class MainActivity : AppCompatActivity() {
         contactFragment.name = "Contact"
         val galleryFragment = GalleryFragmentTab()
         galleryFragment.name = "Gallery"
-        val tbdFragment = TBDFragmentTab()
-        tbdFragment.name = "TBD"
+        val tbdFragment = GameFragmentTab()
+        tbdFragment.name = "Game"
 
         adapter = PageAdapter(supportFragmentManager) // PageAdapter 생성
         adapter?.addItems(contactFragment)
@@ -44,41 +44,27 @@ class MainActivity : AppCompatActivity() {
 
         tab_layout.getTabAt(0)?.setCustomView(createView("Contact"))
         tab_layout.getTabAt(1)?.setCustomView(createView("Gallery"))
-        tab_layout.getTabAt(2)?.setCustomView(createView("TBD"))
+        tab_layout.getTabAt(2)?.setCustomView(createView("Game"))
 
-        tab_layout.setSelectedTabIndicatorColor(Color.parseColor("#2222FF"))
-        tab_layout.addOnTabSelectedListener(object : OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                tab_layout.getTabAt(0)?.getIcon()?.setColorFilter(resources.getColor(android.R.color.black), PorterDuff.Mode.SRC_IN)
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab) {
-                tab_layout.getTabAt(2)?.getIcon()?.setColorFilter(resources.getColor(android.R.color.black), PorterDuff.Mode.SRC_IN)
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab) {}
-        })    }
+        tab_layout.setSelectedTabIndicatorColor(resources.getColor(R.color.sig))
+    }
 
 
     private fun createView(tabName: String): View {
         var tabView = LayoutInflater.from(this).inflate(R.layout.item_tab_button, null)
-        tabView.tab_text.text = tabName
+        tabView.tab_name.text = tabName
 
         when (tabName){
             "Contact" -> {
-                tabView.tab_logo.setImageResource(android.R.drawable.ic_menu_call)
-                //tabView.tab_logo.setImageResource(R.drawable.phone)
-                //tabView.tab_logo.setColorFilter(Color.BLACK)
+                tabView.tab_logo.setImageResource(R.drawable.contact)
                 return tabView
             }
             "Gallery" -> {
-                tabView.tab_logo.setImageResource(android.R.drawable.ic_menu_gallery)
-                //tabView.tab_logo.setColorFilter(Color.BLACK)
+                tabView.tab_logo.setImageResource(R.drawable.gallery)
                 return tabView
             }
-            "TBD" -> {
-                tabView.tab_logo.setImageResource(android.R.drawable.ic_menu_camera)
-                //tabView.tab_logo.setColorFilter(Color.BLACK)
+            "Game" -> {
+                tabView.tab_logo.setImageResource(R.drawable.game)
                 return tabView
             }
             else -> {
