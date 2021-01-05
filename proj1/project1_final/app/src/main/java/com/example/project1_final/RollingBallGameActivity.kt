@@ -30,6 +30,8 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
 
     private var sensorManager: SensorManager? = null
 
+    var difficulty = 1
+
     //private val colorList = mutableListOf(Color.MAGENTA, Color.GREEN, Color.DKGRAY, Color.CYAN)
 
     private var a_x:Float = 0f
@@ -47,6 +49,8 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
     private var endTime: Date? = null
 
     private var freezeTime:Int = 0
+
+    private var timer = 0
 
 
 
@@ -125,6 +129,7 @@ class RollingBallGameActivity: AppCompatActivity(), SensorEventListener{
         }
 
         override fun run() {
+
             when (gameView.life) {
                 3 -> {
                     normalUpdate()

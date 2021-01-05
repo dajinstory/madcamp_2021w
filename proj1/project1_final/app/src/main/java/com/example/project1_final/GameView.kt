@@ -40,6 +40,9 @@ class GameView@JvmOverloads constructor(
 
     var bulletfrozen = false
     var num_freeze = 3
+
+    var speed = 1
+
     //@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     //val airplane = VectorDrawableCompat.create(getContext().getResources(), R.drawable.airplane, null).apply { setBounds() }
 
@@ -89,7 +92,7 @@ class GameView@JvmOverloads constructor(
                 for (bullet in bulletList){
                     canvas?.drawCircle(bullet.posX, bullet.posY, 10f, if (bullet.good) goodbulletPaint else badbulletPaint)
                     if (!bulletfrozen){
-                        bullet.posY += 2*bullet.velocity
+                        bullet.posY += bullet.velocity
                     }
 
                     if (sqrt((bullet.posX-posX)*(bullet.posX-posX)+(bullet.posY-posY)*(bullet.posY-posY))<60f){
@@ -147,7 +150,7 @@ class GameView@JvmOverloads constructor(
                 }
                 else{
                     bulletList = bulletList.filter{ bullet ->
-                        checkBulletinHitmap(bullet)
+                        !checkBulletinHitmap(bullet)
                                 && bullet.posY<1920} as MutableList<Bullet>
                 }
             }
@@ -247,14 +250,14 @@ class GameView@JvmOverloads constructor(
     fun loadRandomBullet(n : Int){
         for (i in 1..n){
             val randX = kotlin.math.min(nextFloat() * 1080f + 30f,1050f)
-            bulletList.add(Bullet(randX))
+            bulletList.add(Bullet(randX, speed))
         }
     }
 
 
 }
 
-class Bullet(initX:Float){
+class Bullet(initX:Float, speed:Int){
     val good = nextFloat()>0.5
     var posY:Float = 0f
     var posX:Float = -9999f
@@ -262,6 +265,6 @@ class Bullet(initX:Float){
 
     init{
         posX = initX
-        velocity = kotlin.math.min(nextFloat()*3f, 0.5f)
+        velocity = kotlin.math.min(speed*nextFloat()*3f, 0.5f)
     }
 }
