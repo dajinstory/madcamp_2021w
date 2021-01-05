@@ -4,11 +4,14 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.project1_final.adapter.PageAdapter
 import com.example.project1_final.fragments.ContactFragmentTab
 import com.example.project1_final.fragments.GalleryFragmentTab
@@ -16,6 +19,8 @@ import com.example.project1_final.fragments.GameFragmentTab
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.item_tab_button.*
 import kotlinx.android.synthetic.main.item_tab_button.view.*
 
 
@@ -45,8 +50,8 @@ class MainActivity : AppCompatActivity() {
         tab_layout.getTabAt(0)?.setCustomView(createView("Contact"))
         tab_layout.getTabAt(1)?.setCustomView(createView("Gallery"))
         tab_layout.getTabAt(2)?.setCustomView(createView("Game"))
-
         tab_layout.setSelectedTabIndicatorColor(resources.getColor(R.color.sig))
+
     }
 
 

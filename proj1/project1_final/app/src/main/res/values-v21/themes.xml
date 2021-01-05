@@ -17,7 +17,7 @@
     <color name="item_text">@color/black</color>
     <color name="item_text_background">@color/pearl_river</color>
     <color name="item_image">@color/gray</color>
-    <color name="item_background">@color/white</color>
+    <color name="item_background">@color/gray_light</color>
     <color name="sig">@color/sig_orange</color>
 
 </resources>
