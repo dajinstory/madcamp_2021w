@@ -22,7 +22,7 @@ import kotlin.math.abs
 import kotlin.math.sqrt
 
 
-class TBDFragmentTab : Fragment(), SensorEventListener {
+class GameFragmentTab : Fragment(), SensorEventListener {
     var name = ""
 
     private val colorList = mutableListOf(Color.MAGENTA, Color.GREEN, Color.DKGRAY, Color.CYAN)
