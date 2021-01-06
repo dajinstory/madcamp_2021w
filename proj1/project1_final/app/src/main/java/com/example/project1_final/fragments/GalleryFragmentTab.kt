@@ -1,7 +1,9 @@
 package com.example.project1_final.fragments
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -12,6 +14,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.project1_final.R
@@ -21,6 +25,7 @@ import com.example.project1_final.model.MediaFileData
 import kotlinx.android.synthetic.main.item_folder_image.*
 import kotlinx.android.synthetic.main.fragment_gallery.*
 import kotlinx.android.synthetic.main.fragment_gallery.view.*
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -65,13 +70,7 @@ class GalleryFragmentTab : Fragment() {
 
 
         camerafab.setOnClickListener {
-            dispatchTakePictureIntent()
-            createImageFile()
-            Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE).also { mediaScanIntent ->
-            val f = File(currentPhotoPath)
-            mediaScanIntent.data = Uri.fromFile(f)
-            requireContext().sendBroadcast(mediaScanIntent)
-            }
+            takePicture()
         }
 
         val recyclerView: RecyclerView = view.gallery
@@ -83,14 +82,34 @@ class GalleryFragmentTab : Fragment() {
 
     val REQUEST_TAKE_PHOTO = 1
 
-    val REQUEST_IMAGE_CAPTURE = 1
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode == Activity.RESULT_OK) {
 
-    private fun dispatchTakePictureIntent() {
-        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
-            takePictureIntent.resolveActivity(requireContext().packageManager)?.also {
-                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+            if (requestCode == REQUEST_TAKE_PHOTO) {
+                var bundle: Bundle? = data?.getExtras()
+                var bitmap: Bitmap = bundle?.get("data") as Bitmap
+                var changedUri: Uri = BitmapToUri(this.requireContext(), bitmap)
+                //ImageDataset.add(MediaFileData(changedUri))
+                //gallery.setImageBitmap(bitmap)
             }
+            refreshFragment(this, activity?.supportFragmentManager!!)
         }
+    }
+    fun BitmapToUri(context: Context, bitmap: Bitmap): Uri {
+        var bytes =  ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100, bytes)
+        val path = MediaStore.Images.Media.insertImage(context.contentResolver, bitmap, "Title", null)
+        return Uri.parse(path.toString())
+    }
+    private fun takePicture() {
+        //카메라 앱 실행
+        var capture = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(capture, REQUEST_TAKE_PHOTO)
+    }
+    fun refreshFragment(fragment: Fragment, fragmentManager: FragmentManager){
+        var ft: FragmentTransaction = fragmentManager.beginTransaction()
+        ft.detach(fragment).attach(fragment).commit()
     }
 
     lateinit var currentPhotoPath: String

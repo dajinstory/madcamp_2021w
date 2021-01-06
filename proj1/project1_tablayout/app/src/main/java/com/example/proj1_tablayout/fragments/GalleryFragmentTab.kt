@@ -70,9 +70,7 @@ class GalleryFragmentTab : Fragment() {
 
 
 
-        camerafab.setOnClickListener {
-            takePicture()
-        }
+
 
         val recyclerView: RecyclerView = view.gallery
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
