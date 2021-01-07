@@ -340,6 +340,6 @@ class Bullet(initX:Float, speed:Float){
 
     init{
         posX = initX
-        velocity = min(speed*nextFloat()*5f + 2,speed*0.2f+2)
+        velocity = max(speed*nextFloat()*3f + 2,speed*0.2f+2)
     }
 }
