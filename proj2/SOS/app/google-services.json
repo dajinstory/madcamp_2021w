@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "401391919488",
+    "project_id": "madcamp-week2-login",
+    "storage_bucket": "madcamp-week2-login.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:401391919488:android:95ccf0d98c820532b4e165",
+        "android_client_info": {
+          "package_name": "com.example.sos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "401391919488-7l4p4cpt6i62blhm1mdcvshocf3kcbah.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBG4mFQtXNVhzTV8FPuHi2TPDy2nsBCBwo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "401391919488-7l4p4cpt6i62blhm1mdcvshocf3kcbah.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
