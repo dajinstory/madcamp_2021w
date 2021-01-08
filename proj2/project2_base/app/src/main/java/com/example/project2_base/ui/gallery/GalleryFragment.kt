@@ -62,7 +62,7 @@ class GalleryFragment : Fragment() {
       if (requestCode == REQUEST_TAKE_PHOTO) {
         var bundle: Bundle? = data?.getExtras()
         var bitmap: Bitmap = bundle?.get("data") as Bitmap
-        var changedUri: Uri = galleryViewModel.BitmapToUri(this.requireContext(), bitmap)
+        var changedUri: Uri = galleryViewModel.bitmap2Uri(this.requireContext(), bitmap)
         //ImageDataset.add(MediaFileData(changedUri))
         //gallery.setImageBitmap(bitmap)
       }

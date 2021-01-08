@@ -1,68 +1,67 @@
-//package com.example.project2_base.ui.gallery
-//
-//import android.app.Activity
-//import android.content.Intent
-//import android.graphics.Bitmap
-//import android.net.Uri
-//import android.os.Bundle
-//import android.view.LayoutInflater
-//import android.view.View
-//import android.view.ViewGroup
-//import androidx.fragment.app.Fragment
-//import androidx.lifecycle.ViewModelProvider
-//import androidx.recyclerview.widget.LinearLayoutManager
-//import androidx.recyclerview.widget.RecyclerView
-//import com.example.project2_base.R
-//import com.example.project2_base.ui.phone_book.contact.ContactActivity
-//import kotlinx.android.synthetic.main.fragment_phone_book.*
-//
-//class AlbumFragment : Fragment() {
-//  lateinit var galleryViewModel: AlbumViewModel
-//  lateinit var galleryRecyclerView: RecyclerView
-//  val REQUEST_TAKE_PHOTO = 1
-//
-//  override fun onCreateView(
-//    inflater: LayoutInflater,
-//    container: ViewGroup?,
-//    savedInstanceState: Bundle?
-//  ): View? {
-//
-//    galleryViewModel = ViewModelProvider(this).get(AlbumViewModel::class.java)
-//    return inflater.inflate(R.layout.fragment_gallery,container,false)
-//  }
-//
-//  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//    super.onViewCreated(view, savedInstanceState)
-//
-//    // RecyclerView
-//    galleryRecyclerView = view.findViewById(R.id.gallery_recycler_view)
-//    galleryRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-//    galleryRecyclerView.adapter = GalleryCursorAdapter(requireContext(), phoneBookViewModel.cursor!!)
-//
-//    // FAB
-//    add_fab.setOnClickListener{
-//      //Toast.makeText(requireContext(), RecordDatabase.getInstance(requireContext())?.cursor?.count.toString(), Toast.LENGTH_LONG).show()
-//      val nextIntent = Intent(requireContext(), ContactActivity::class.java)
-//      val requestCode: Int = 10000 // ADD
-//      nextIntent.putExtra("operation", "ADD")
-//      nextIntent.putExtra("position", "-1")
-//      startActivityForResult(nextIntent, requestCode)
-//    }
-//  }
-//
-//  override fun onActivityResult(requestCode : Int, resultCode : Int, data : Intent?) {
-//    super.onActivityResult(requestCode, resultCode, data)
-//
-//    // Update here
-//    if(resultCode == Activity.RESULT_OK) {
-//      if (requestCode == REQUEST_TAKE_PHOTO) {
-//        var bundle: Bundle? = data?.getExtras()
-//        var bitmap: Bitmap = bundle?.get("data") as Bitmap
-//        var changedUri: Uri = BitmapToUri(this.requireContext(), bitmap)
-//        //ImageDataset.add(MediaFileData(changedUri))
-//        //gallery.setImageBitmap(bitmap)
-//      }
-//      refreshFragment(this, activity?.supportFragmentManager!!)
-//    }
-//  }
-//}
+package com.example.project2_base.ui.gallery.album
+
+import android.app.Activity
+import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
+import android.os.Build
+import android.os.Bundle
+import android.provider.MediaStore
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.project2_base.R
+import com.example.project2_base.di.AlbumDatabase
+import kotlinx.android.synthetic.main.fragment_album.*
+
+
+class AlbumFragment : Fragment() {
+  lateinit var albumViewModel: AlbumViewModel
+  lateinit var albumRecyclerView: RecyclerView
+  var columns: Int = 4
+  val REQUEST_TAKE_PHOTO = 1
+  lateinit var currentPhotoPath: String
+
+  override fun onCreateView(
+          inflater: LayoutInflater,
+          container: ViewGroup?,
+          savedInstanceState: Bundle?
+  ): View? {
+
+    albumViewModel = ViewModelProvider(this).get(AlbumViewModel::class.java)
+    return inflater.inflate(R.layout.fragment_album, container, false)
+  }
+
+  @RequiresApi(Build.VERSION_CODES.Q)
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+
+    // RecyclerView
+    var cursor= AlbumDatabase.getInstance(requireContext(), (activity as AlbumActivity).albumName)!!.cursor
+    albumRecyclerView = view.findViewById(R.id.album_recycler_view)
+    albumRecyclerView.layoutManager = GridLayoutManager(requireContext(), columns)
+//    albumRecyclerView.adapter = AlbumCursorAdapter(requireContext(), albumViewModel.cursor!!)
+    albumRecyclerView.adapter = AlbumCursorAdapter(requireContext(), cursor!!)
+
+    // camera FAB
+    camera_fab.setOnClickListener {
+      //카메라 앱 실행
+      var captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+      startActivityForResult(captureIntent, REQUEST_TAKE_PHOTO)
+    }
+  }
+
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data)
+
+    // Update here
+
+  }
+}

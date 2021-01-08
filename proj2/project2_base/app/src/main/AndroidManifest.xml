@@ -30,6 +30,7 @@
 
         <activity android:name=".MainActivity"/>
         <activity android:name=".ui.phone_book.contact.ContactActivity"/>
+        <activity android:name=".ui.gallery.album.AlbumActivity"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"
