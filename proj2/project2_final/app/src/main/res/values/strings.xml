@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">project2_final</string>
+    <string name="title_home">Home</string>
+    <string name="title_search">Search</string>
+    <string name="title_favorites">Faborites</string>
+    <string name="title_mypage">Mypage</string>
+</resources>

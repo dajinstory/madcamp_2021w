@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.Project2_final" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="colorPrimary">@color/charcoal</item>
+        <item name="colorOnPrimary">@color/gray_light</item>
+        <item name="android:windowBackground">@color/charcoal</item>
+
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">@color/sig_blue</item>
+        <item name="android:navigationBarColor" tools:targetApi="1">@color/gray_light</item>
+        <!-- Customize your theme here. -->
+        <item name="tabSelectedTextColor">?android:textColorPrimary</item>
+    </style>
+
+    <color name="text">@color/gray_light</color>
+    <color name="text_background">@color/charcoal</color>
+    <color name="image">@color/gray</color>
+    <color name="image_background">@color/charcoal_light</color>
+    <color name="item">@color/gray</color>
+    <color name="item_background">@color/gray_light</color>
+    <color name="sig">@color/sig_blue</color>
+
+</resources>
