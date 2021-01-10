@@ -1,5 +1,8 @@
 const router = require('express').Router();
 const multer = require('multer');
+const http = require('http');
+const url = require('url');
+const fs = require('fs');
 
 // multer setting
 const upload = multer({
@@ -15,30 +18,24 @@ const upload = multer({
   }),
 });
 
-// Create new image document
-router.post('/uploads', upload.single('img'), (req, res) => {
-  Image.create(req.body)
-    .then(image => res.send(image))
-    .catch(err => res.status(500).send(err));
+// upload image
+router.post("/upload", (req, res, next) => {
+  upload(req, res, function(err){
+    if( err instanceof multer.MulterError){
+      return next(err);
+    }else if (err){
+      return next(err);
+    }
+    console.log(req.file.originalname)
+    console.log(req.file.filename)
+    console.log(req.file.size)
+
+    return res.json({success:1, filename:req.file.filename})
+  });
 });
 
 // Find All
 router.get('/', (req, res) => {
-  Image.findAll()
-    .then((images) => {
-      if (!images.length) return res.status(404).send({ err: 'Image not found' });
-      res.send(`find successfully: ${images}`);
-    })
-    .catch(err => res.status(500).send(err));
 });
 
-// Find One by id
-router.get('/imageid/:imageid', (req, res) => {
-	Image.findOneByImageId(req.params.imageid)
-		.then((image) => {
-			if (!image) return res.status(404).send({ err: 'Image not found' });
-				res.send(`findOne successfully: ${image}`);
-		})
-		.catch(err => res.status(500).send(err));
-});
 module.exports = router;
