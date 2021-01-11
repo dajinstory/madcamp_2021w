@@ -27,16 +27,16 @@
             </intent-filter>
         </activity>
 
-
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.shuvic.alumni.cameraalbum, com.example.android.fileprovider"
+            android:authorities="com.example.project2_final.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths"></meta-data>
         </provider>
+
     </application>
 
 </manifest>

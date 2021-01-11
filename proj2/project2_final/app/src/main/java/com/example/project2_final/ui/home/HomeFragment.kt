@@ -32,6 +32,9 @@ class HomeFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
+    // Load from Server
+    homeViewModel.loadFromServer(requireContext())
+
     // Liquor RecyclerView
     liquorRecyclerView = view.findViewById(R.id.best_liquor_recycler_view)
     liquorRecyclerView.layoutManager = LinearLayoutManager(requireContext())
