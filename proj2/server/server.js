@@ -38,6 +38,7 @@ app.use('/fbas', require('./routes/fbas'));
 app.use('/liquors', require('./routes/liquors'));
 app.use('/shops', require('./routes/shops'));
 app.use('/images', require('./routes/images'));
+app.use('/static', express.static('images'));
 
 app.listen(port, () => console.log(`Server listening on port ${port}`));
 

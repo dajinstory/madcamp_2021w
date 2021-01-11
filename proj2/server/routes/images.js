@@ -20,14 +20,6 @@ fs.readdir("images/uploads", (err) => {
 });
 
 
-const form =
-    "<!DOCTYPE HTML><html><body>" +
-    "<form method='post' action='/upload' enctype='multipart/form-data'>" +
-    "<input type='file' name='upload'/>" +
-    "<input type='submit' /></form>" +
-    "</body></html>";
-
-
 // multer setting
 const upload = multer({
   storage: multer.diskStorage({
@@ -46,12 +38,9 @@ const upload = multer({
 // upload image
 router.post("/upload", upload.single('file'), (req, res) => {
 	console.log(req.file);
-});
-
-// get image
-router.get('/', (req, res) => {
-	res.writeHead(StatusCode.OK, { "Content-Type": "text/html" });
-	res.end(form);
+	res.json({url: "uploads/"+req.file.filename})
 });
 
 module.exports = router;
+
+
