@@ -1,11 +1,11 @@
 const router = require('express').Router();
-const Shop = require('../models/liquor');
+const Liquor = require('../models/liquor');
 
 // Find All
 router.get('/', (req, res) => {
-  Shop.findAll()
+  Liquor.findAll()
     .then((liquors) => {
-      if (!liquors.length) return res.status(404).send({ err: 'Shop not found' });
+      if (!liquors.length) return res.status(404).send({ err: 'Liquor not found' });
       res.send(`find successfully: ${liquors}`);
     })
     .catch(err => res.status(500).send(err));
@@ -13,9 +13,9 @@ router.get('/', (req, res) => {
 
 // Find One by id
 router.get('/liquorid/:liquorid', (req, res) => {
-  Shop.findOneByShopId(req.params.liquorid)
+  Liquor.findOneByLiquorId(req.params.liquorid)
     .then((liquor) => {
-      if (!liquor) return res.status(404).send({ err: 'Shop not found' });
+      if (!liquor) return res.status(404).send({ err: 'Liquor not found' });
       res.send(`findOne successfully: ${liquor}`);
     })
     .catch(err => res.status(500).send(err));
@@ -23,21 +23,21 @@ router.get('/liquorid/:liquorid', (req, res) => {
 
 // Create new liquor document
 router.post('/', (req, res) => {
-  Shop.create(req.body)
+  Liquor.create(req.body)
     .then(liquor => res.send(liquor))
     .catch(err => res.status(500).send(err));
 });
 
 // Update by id
 router.put('/liquorid/:liquorid', (req, res) => {
-  Shop.updateByShopId(req.params.liquorid, req.body)
+  Liquor.updateByLiquorId(req.params.liquorid, req.body)
     .then(liquor => res.send(liquor))
     .catch(err => res.status(500).send(err));
 });
 
 // Delete by id
 router.delete('/liquorid/:liquorid', (req, res) => {
-  Shop.deleteByShopId(req.params.liquorid)
+  Liquor.deleteByLiquorId(req.params.liquorid)
     .then(() => res.sendStatus(200))
     .catch(err => res.status(500).send(err));
 });
