@@ -22,5 +22,6 @@ class MainActivity : AppCompatActivity() {
             R.id.navigation_phone_book, R.id.navigation_gallery, R.id.navigation_game))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
     }
 }
