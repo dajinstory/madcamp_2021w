@@ -37,7 +37,7 @@ class ShopCursorAdapter(private val context : Context, cursor: Cursor)
         }
 
         fun setItem(item: Shop, position: Int) {
-            Glide.with(_view.context).load("http://54.82.239.153:47000"+item.imgUri).into(profile);
+            Glide.with(_view.context).load("http://54.227.34.32:47000"+item.imgUri).into(profile);
             name.text = item.name
             type.text = item.type
             contact.text = item.contact

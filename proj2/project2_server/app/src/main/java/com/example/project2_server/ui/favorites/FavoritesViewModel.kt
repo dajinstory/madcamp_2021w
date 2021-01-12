@@ -103,14 +103,14 @@ class FavoritesViewModel(
         supplementService.postImage(body, name)!!.enqueue(object : Callback<ResponseBody?> {
             override fun onResponse(call: Call<ResponseBody?>?, response: Response<ResponseBody?>) {
                 if (response.code() === 200) {
-                    Toast.makeText(context, response.code().toString() + "SUCCESS", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(context, response.code().toString() + "SUCCESS", Toast.LENGTH_SHORT).show()
 
                 }
-                Toast.makeText(context, response.code().toString() + "OO", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(context, response.code().toString() + "OO", Toast.LENGTH_SHORT).show()
             }
 
             override fun onFailure(call: Call<ResponseBody?>?, t: Throwable) {
-                Toast.makeText(FacebookSdk.getApplicationContext(), "req fail", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(FacebookSdk.getApplicationContext(), "req fail", Toast.LENGTH_SHORT).show()
                 t.printStackTrace()
             }
         })
@@ -128,14 +128,14 @@ class FavoritesViewModel(
         supplementService.uploadMyLiquors(newMyLiquor)!!.enqueue(object : Callback<ResponseBody?> {
             override fun onResponse(call: Call<ResponseBody?>?, response: Response<ResponseBody?>) {
                 if (response.code() === 200) {
-                    Toast.makeText(context, response.code().toString() + "MyLiquorSUCCESS", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(context, response.code().toString() + "MyLiquorSUCCESS", Toast.LENGTH_SHORT).show()
 
                 }
-                Toast.makeText(context, response.code().toString() + "MyLiquorOO", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(context, response.code().toString() + "MyLiquorOO", Toast.LENGTH_SHORT).show()
             }
 
             override fun onFailure(call: Call<ResponseBody?>?, t: Throwable) {
-                Toast.makeText(FacebookSdk.getApplicationContext(), "req fail", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(FacebookSdk.getApplicationContext(), "req fail", Toast.LENGTH_SHORT).show()
                 t.printStackTrace()
             }
         })

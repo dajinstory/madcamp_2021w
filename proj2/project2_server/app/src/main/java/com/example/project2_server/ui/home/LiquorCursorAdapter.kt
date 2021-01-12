@@ -30,7 +30,7 @@ class LiquorCursorAdapter(private val context : Context, cursor: Cursor)
         }
 
         fun setItem(item: Liquor, position: Int) {
-            Glide.with(_view.context).load("http://54.82.239.153:47000"+item.imgUri).into(profile);
+            Glide.with(_view.context).load("http://54.227.34.32:47000"+item.imgUri).into(profile);
             name.text = item.name
             if(name.text.length > 25){
                 name.text = ""

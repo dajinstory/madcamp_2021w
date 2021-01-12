@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitClient {
     private var instance: Retrofit? = null
     private val gson = GsonBuilder().setLenient().create()
-    private const val BASE_URL = "http://54.82.239.153:47000/"
+    private const val BASE_URL = "http://54.227.34.32:47000/"
 
     // SingleTon
     fun getInstance(): Retrofit {
