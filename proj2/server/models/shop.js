@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 // Define Schemes
 const shopSchema = new mongoose.Schema({
-	_id:{type:Number, required:true, unique:true},
+	_id:{type:Number},
 	name:{type:String},
 	type:{type:String},
 	contact:{type:String},
@@ -12,7 +12,9 @@ const shopSchema = new mongoose.Schema({
 	imgUri:{type:String}
 },
 {
-	timestamps:true
+	timestamps:false,
+	versionKey:false
+	
 });
 
 // Create new document
@@ -26,20 +28,25 @@ shopSchema.statics.findAll = function () {
   return this.find({});
 };
 
-// Find One by shopid
-shopSchema.statics.findOneByShopId = function (id) {
-  return this.findOne({ id });
+// Find One by Name
+shopSchema.statics.findOneByName = function (name) {
+  return this.findOne({ name: name });
 };
 
-// Update by shopAccountId
-shopSchema.statics.updateByShopId = function (id, payload) {
+// Find One by Id
+shopSchema.statics.findOneById = function (_id) {
+  return this.findOne({ _id: _id });
+};
+
+// Update by Id
+shopSchema.statics.updateById = function (_id, payload) {
   // { new: true }: return the modified document rather than the original. defaults to false
-  return this.findOneAndUpdate({ id }, payload, { new: true });
+  return this.findOneAndUpdate({ _id: _id }, payload, { new: true });
 };
 
-// Delete by shopAccountId
-shopSchema.statics.deleteByShopId = function (id) {
-  return this.remove({ id });
+// Delete by Id
+shopSchema.statics.deleteById = function (_id) {
+  return this.remove({ _id: _id });
 };
 
 // Create Model & Export
