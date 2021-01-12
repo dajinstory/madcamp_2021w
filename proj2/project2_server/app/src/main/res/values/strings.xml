@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">project2_server</string>
+    <string name="title_home">Home</string>
+    <string name="title_search">Search</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="title_mypage">Mypage</string>
+    <string name="facebook_app_id">410682613473053</string> <string name="fb_login_protocol_scheme">fb410682613473053</string>
+</resources>
