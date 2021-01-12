@@ -4,6 +4,7 @@ const http = require('http');
 const url = require('url');
 const fs = require('fs');
 const crypto = require('crypto')
+const { exec } = require('child_process');
 
 // directory setting
 fs.readdir("images", (err) => {
@@ -65,7 +66,14 @@ router.post('/upload',
 	console.log(req.file);
 	console.log(req.body);
 	res.redirect("/uploads/" + req.file.originalname);//fileName
-
+	exec('touch a', (err, stdout, stderr) => {
+		if (err) {
+			console.log("CANNOT CHILD PROCESS");
+			return;
+		}
+		console.log(`stdout: ${stdout}`);
+		console.log(`stderr: ${stderr}`);
+	});
 	return res.status(200).end();
 
 });
