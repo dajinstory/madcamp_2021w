@@ -1,0 +1,52 @@
+[
+    {
+        "_id": 1,
+        "name": "BrotherhoodAssociation",
+        "type": "TraditionalMarket",
+        "contact": "010-1997-0407",
+        "address": "181-1 Hoehyeon-dong 1-ga, Jung-gu, Seoul",
+        "businessHour": "11am-5pm",
+        "detail": "CoolGuy",
+        "imgUri": "/static/shops/shop_brother.jpg"
+    },
+    {
+        "_id": 2,
+        "name": "WineOutlet",
+        "type": "WineMarket",
+        "contact": "010-2021-0113",
+        "address": "Ttukseom-ro 273 Seongsu-dong 1-ga, Seongdong-gu, Seoul",
+        "businessHour": "10am-7pm",
+        "detail": "VariousWineTypes",
+        "imgUri": "/static/shops/shop_wine_outlet.jpg"
+    },
+    {
+        "_id": 3,
+        "name": "Emart",
+        "type": "SuperMarket",
+        "contact": "010-1999-1111",
+        "address": "Wangsimni Plaza, Haengdang 1-dong, Seongdong-gu, Seoul",
+        "businessHour": "11am-7pm",
+        "detail": "Big",
+        "imgUri": "/static/shops/shop_emart.jpg"
+    },
+    {
+        "_id": 4,
+        "name": "YuseongMarket",
+        "type": "TraditionalMarket",
+        "contact": "010-2000-3000",
+        "address": "191 Jangdae-dong, Yuseong-gu, Daejeon",
+        "businessHour": "8am-5pm",
+        "detail": "SaleForKAIST",
+        "imgUri": "/static/shops/shop_yuseong.jpg"
+    },
+    {
+        "_id": 5,
+        "name": "GazaMarket",
+        "type": "RetailMarket",
+        "contact": "010-4000-5000",
+        "address": "Dunsan 2-dong, Seo-gu, Daejeon",
+        "businessHour": "11am-7pm",
+        "detail": "SaleForKAIST",
+        "imgUri": "/static/shops/shop_gaza.jpg"
+    }
+]

@@ -1,0 +1,200 @@
+[
+    {
+        "_id": 1,
+        "name": "Ballantine_17",
+        "type": "Whiskey",
+        "price": 120000,
+        "degree": 40,
+        "detail": "Good",
+        "imgUri": "/static/liquors/ballantine_17.jpg"
+    },
+    {
+        "_id": 2,
+        "name": "Ballantine_21",
+        "type": "Whiskey",
+        "price": 220000,
+        "degree": 40,
+        "detail": "Good",
+        "imgUri": "/static/liquors/ballantine_21.jpg"
+    },
+    {
+        "_id": 3,
+        "name": "Ballantine_30",
+        "type": "Whiskey",
+        "price": 320000,
+        "degree": 40,
+        "detail": "Good",
+        "imgUri": "/static/liquors/ballantine_30.jpg"
+    },
+    {
+        "_id": 4,
+        "name": "Balvenie_16",
+        "type": "Whiskey",
+        "price": 80000,
+        "degree": 40,
+        "detail": "Good",
+        "imgUri": "/static/liquors/balvenie_16.jpg"
+    },
+    {
+        "_id": 5,
+        "name": "Blanc",
+        "type": "Beer",
+        "price": 3000,
+        "degree": 10,
+        "detail": "Good",
+        "imgUri": "/static/liquors/blanc.jpg"
+    },
+    {
+        "_id": 6,
+        "name": "Camus_vsop",
+        "type": "Brandy",
+        "price": 80000,
+        "degree": 45,
+        "detail": "Good",
+        "imgUri": "/static/liquors/camus_vsop.jpg"
+    },
+    {
+        "_id": 7,
+        "name": "Camus_xo",
+        "type": "Brandy",
+        "price": 140000,
+        "degree": 45,
+        "detail": "Good",
+        "imgUri": "/static/liquors/camus_xo.jpg"
+    },
+    {
+        "_id": 8,
+        "name": "Glenfiddich_18",
+        "type": "Whiskey",
+        "price": 80000,
+        "degree": 40,
+        "detail": "Good",
+        "imgUri": "/static/liquors/glenfiddich_18.jpg"
+    },
+    {
+        "_id": 9,
+        "name": "Glenfiddich_21",
+        "type": "Whiskey",
+        "price": 180000,
+        "degree": 40,
+        "detail": "Good",
+        "imgUri": "/static/liquors/glenfiddich_21.jpg"
+    },
+    {
+        "_id": 10,
+        "name": "Glenfiddich_25",
+        "type": "Whiskey",
+        "price": 280000,
+        "degree": 40,
+        "detail": "Good",
+        "imgUri": "/static/liquors/glenfiddich_25.jpg"
+    },
+    {
+        "_id": 11,
+        "name": "Hanrasan",
+        "type": "Soju",
+        "price": 2000,
+        "degree": 22,
+        "detail": "Good",
+        "imgUri": "/static/liquors/hanrasan.jpg"
+    },
+    {
+        "_id": 12,
+        "name": "JackDaniels_gold",
+        "type": "Whiskey",
+        "price": 100000,
+        "degree": 40,
+        "detail": "Good",
+        "imgUri": "/static/liquors/jack_daniels_gold.jpg"
+    },
+    {
+        "_id": 13,
+        "name": "JackDaniels_honey",
+        "type": "Whiskey",
+        "price": 50000,
+        "degree": 40,
+        "detail": "Good",
+        "imgUri": "/static/liquors/jack_daniels_honey.jpg"
+    },
+    {
+        "_id": 14,
+        "name": "Gyeongwol",
+        "type": "Soju",
+        "price": 2000,
+        "degree": 16,
+        "detail": "Good",
+        "imgUri": "/static/liquors/gyeongwol.jpg"
+    },
+    {
+        "_id": 15,
+        "name": "JohnnieWalker_18",
+        "type": "Whiskey",
+        "price": 80000,
+        "degree": 40,
+        "detail": "Good",
+        "imgUri": "/static/liquors/johnnie_walker_18.jpg"
+    },
+    {
+        "_id": 16,
+        "name": "JohnnieWalker_blue",
+        "type": "Whiskey",
+        "price": 380000,
+        "degree": 40,
+        "detail": "Good",
+        "imgUri": "/static/liquors/johnnie_walker_blue.jpg"
+    },
+    {
+        "_id": 17,
+        "name": "JohnnieWalker_green",
+        "type": "Whiskey",
+        "price": 120000,
+        "degree": 40,
+        "detail": "Good",
+        "imgUri": "/static/liquors/johnnie_walker_green.jpg"
+    },
+    {
+        "_id": 18,
+        "name": "O2lin",
+        "type": "Soju",
+        "price": 2000,
+        "degree": 18,
+        "detail": "Good",
+        "imgUri": "/static/liquors/o2lin.jpg"
+    },
+    {
+        "_id": 19,
+        "name": "RoyalSalute_21",
+        "type": "Whiskey",
+        "price": 180000,
+        "degree": 40,
+        "detail": "Good",
+        "imgUri": "/static/liquors/royal_salute_21.jpg"
+    },
+    {
+        "_id": 20,
+        "name": "RoyalSalute_25",
+        "type": "Whiskey",
+        "price": 280000,
+        "degree": 40,
+        "detail": "Good",
+        "imgUri": "/static/liquors/royal_salute_25.jpg"
+    },
+    {
+        "_id": 21,
+        "name": "RoyalSalute_32",
+        "type": "Whiskey",
+        "price": 380000,
+        "degree": 40,
+        "detail": "Good",
+        "imgUri": "/static/liquors/royal_salute_32.jpg"
+    },
+    {
+        "_id": 22,
+        "name": "Stella",
+        "type": "Beer",
+        "price": 3000,
+        "degree": 10,
+        "detail": "Good",
+        "imgUri": "/static/liquors/stella.jpg"
+    }
+]
