@@ -11,11 +11,18 @@ from dl_utils import _gan_image
 
 app = Flask(__name__)
 
+# COMMON
+@app.route("/ping")
+def ping():
+    return "PING"
 
 # DET
 @app.route("/det", methods = ["POST"])
 def det_image():
     if request.method == "POST":
+        print(flask.request)
+        print(flask.request.data)
+        print(flask.request.files)
         files = flask.request.files
         sFile = files["source"]
         
