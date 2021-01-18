@@ -73,7 +73,7 @@ def gan_image():
     if request.method == "POST":
         files = flask.request.files
         sFile = files["source"]
-        #mFile = files["mask"]
+        mFile = files["mask"]
         
         sFilename = "samples/source_gan.jpg"
         mFilename = "samples/mask_gan.jpg"
@@ -81,12 +81,12 @@ def gan_image():
         
         sImage = Image.open(sFile)
         sImage.save(sFilename)
-        mImage = np.zeros((sImage.size[1], sImage.size[0], 3)).astype(np.uint8)
-        for x in range(100):
-            for y in range(100):
-                mImage[x][y][0]=255
-        mImage = Image.fromarray(mImage)
-        #mImage = Image.open(mFile)
+        #mImage = np.zeros((sImage.size[1], sImage.size[0], 3)).astype(np.uint8)
+        #for x in range(100):
+        #    for y in range(100):
+        #        mImage[x][y][0]=255
+        #mImage = Image.fromarray(mImage)
+        mImage = Image.open(mFile)
         mImage.save(mFilename)
 
         _gan_image(sFilename, mFilename, rFilename)
