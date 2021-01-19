@@ -100,8 +100,8 @@ def meme_image():
         sFile = files["source"]
         tFile = files["target"]
         
-        sFilename = "inputs/source.jpg"
-        tFilename = "inputs/target.jpg"
+        sFilename = "samples/source.jpg"
+        tFilename = "samples/target.jpg"
         rFilename = "results/result.jpg"
         
         sImage = Image.open(sFile)
