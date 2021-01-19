@@ -10,7 +10,7 @@ class Transform extends React.Component {
       file: null,
       filename: null,
       isLoading: true,
-      result_file: null,
+      result_file: "http://192.249.18.233:5000/results/result_"+props.match.params.name.toLowerCase()+".jpg"
     };
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -40,6 +40,7 @@ class Transform extends React.Component {
               alert("successfully uploaded");
           }).catch((error) => {
               alert("looks succesful");
+			  this.setState({isLoading:false}) 
           }
       );
   }
@@ -49,7 +50,6 @@ class Transform extends React.Component {
     const { file, isLoading, memes} = this.state;
     return (
         <section className = "container">
-          {isLoading ? (
               <div className="transform__container">
                 <form onSubmit={this.onFormSubmit}>
                   <h2>  {this.state.domain} </h2>
@@ -57,9 +57,14 @@ class Transform extends React.Component {
                   <button type="submit">Search</button>
                 </form>
               </div>
+          {isLoading ? (
+			<div> Loading...</div>
           ) : (
-              <div> 결과~! 짜짠 </div>
-          )}
+			<img 
+				src={this.state.result_file}
+				alt="new"
+			/>
+		  )}
         </section>
     )
   }
