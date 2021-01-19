@@ -86,24 +86,47 @@ export default function OutlinedCard() {
 const Example = [
     {
         id: "1",
-        image: "img/goguma.jpg",
+        image: "images/goguma.jpg",
         mood: "happy"
     },
     {
         id: "2",
-        image: "img/love.jpg",
+        image: "images/love.jpg",
         mood: "sad"
     },
     {
         id: "3",
-        image: "img/ms.jpg",
+        image: "images/ms.jpg",
         mood: "soso"
     },
     {
         id: "4",
-        image: "img/orange.jpg",
+        image: "images/orange.jpg",
         mood: "bad"
+    },
+    {
+        id: "5",
+        image: "images/misun.jpg",
+        mood: "happy"
+    },
+    {
+        id: "6",
+        image: "images/kwon.jpg",
+        mood: "sad"
+    },
+    {
+        id: "7",
+        image: "images/jinyoung.jpg",
+        mood: "soso"
+    },
+    {
+        id: "8",
+        image: "images/hagisiru.jpg",
+        mood: "bad"
+    },
+    {
+        id: "9",
+        image: "images/gomabda.jpg",
+        mood: "happy"
     }
-    
-    
 ]
