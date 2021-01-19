@@ -92,7 +92,7 @@ def gan_image():
 def meme_image():
     # request
     req = flask.request
-
+    print(req.files)
     # create new request
     url = "http://localhost:47000/meme"
     files = {
