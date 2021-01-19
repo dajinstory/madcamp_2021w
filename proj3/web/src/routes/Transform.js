@@ -34,11 +34,12 @@ class Transform extends React.Component {
       };
 
       // call post
-      axios.post("http://localhost:5000/det", formData, config)
+	 console.log(this.state.domain)
+	axios.post("http://192.249.18.233:5000/"+this.state.domain.toLowerCase(), formData, config)
           .then((response) => {
               alert("successfully uploaded");
           }).catch((error) => {
-              alert("fail to upload image" + error);
+              alert("looks succesful");
           }
       );
   }
