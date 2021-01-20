@@ -8,6 +8,7 @@ import Service from "./routes/Service";
 import Meme from "./routes/Meme";
 import Beta from "./routes/Beta";
 import Transform from "./routes/Transform";
+import Convert from "./routes/Convert";
 import Navigation from "./components/Navigation";
 import "./App.css";
 
@@ -20,6 +21,7 @@ function App() {
       <Route path="/meme" component={Meme} />
       <Route path="/beta" component={Beta} />
       <Route path="/editor/:name" component={Transform} />
+      <Route path="/converter/:name" component={Convert} />
     </HashRouter>
   );
 }

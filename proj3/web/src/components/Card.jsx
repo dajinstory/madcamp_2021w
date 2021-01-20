@@ -30,7 +30,7 @@ function Image({id, image, mood}) {
     return (
         <Link style={{ textDecoration: 'none' }}
             to={{
-                pathname: `/service/${id}`,
+                pathname: `/converter/${image}`,
                 state: {
                     id: id,
                     image: image,
@@ -50,18 +50,18 @@ function Image({id, image, mood}) {
                         {mood}
                     </Typography>
                     <Typography className={classes.pos} color="textSecondary">
-                        {mood}
+                        {image}
                     </Typography>
                     <Typography variant="body2" component="p">
-                    <img src={image} height="200px" width="auto" alt="test" />
+                    <img src={"images/"+image} height="200px" width="auto" alt="test" />
                     </Typography>
                 </CardContent>
                 <CardActions>
                     <Button size="small">
-                        <img src="img/btn/heart.png" alt="test" width="20px" height="20px"/>
+                        <img src="images/btn/heart.png" alt="test" width="20px" height="20px"/>
                     </Button>
                     <Button size="small">
-                        <img src="img/btn/download.png" alt="test" width="20px" height="20px"/>
+                        <img src="images/btn/download.png" alt="test" width="20px" height="20px"/>
                     </Button>
                 </CardActions>
             </Card>
@@ -86,47 +86,47 @@ export default function OutlinedCard() {
 const Example = [
     {
         id: "1",
-        image: "images/goguma.jpg",
+        image: "goguma.jpg",
         mood: "happy"
     },
     {
         id: "2",
-        image: "images/love.jpg",
+        image: "love.jpg",
         mood: "sad"
     },
     {
         id: "3",
-        image: "images/ms.jpg",
+        image: "ms.jpg",
         mood: "soso"
     },
     {
         id: "4",
-        image: "images/orange.jpg",
+        image: "orange.jpg",
         mood: "bad"
     },
     {
         id: "5",
-        image: "images/misun.jpg",
+        image: "misun.jpg",
         mood: "happy"
     },
     {
         id: "6",
-        image: "images/kwon.jpg",
+        image: "kwon.jpg",
         mood: "sad"
     },
     {
         id: "7",
-        image: "images/jinyoung.jpg",
-        mood: "soso"
+        image: "jinyoung.jpg",
+        mood: "happy"
     },
     {
         id: "8",
-        image: "images/hagisiru.jpg",
+        image: "hagisiru.jpg",
         mood: "bad"
     },
     {
         id: "9",
-        image: "images/gomabda.jpg",
+        image: "gomabda.jpg",
         mood: "happy"
     }
 ]
