@@ -43,3 +43,7 @@ Thumbs.db
 
 # Node Modules
 node_modules/
+
+# Deep Learning
+*.pth
+*.weights
