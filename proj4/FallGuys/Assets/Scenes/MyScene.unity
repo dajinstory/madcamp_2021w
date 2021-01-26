@@ -648,6 +648,16 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 4256387195281471566, guid: 2abf19653d633114faedf3b60dc6c39f,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 932531194}
+    - target: {fileID: 4256387195281471566, guid: 2abf19653d633114faedf3b60dc6c39f,
+        type: 3}
+      propertyPath: jumpHeight
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2abf19653d633114faedf3b60dc6c39f, type: 3}
 --- !u!1001 &536074470
@@ -1083,7 +1093,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Camera Holder
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8125632388429620747, guid: 74fe7eed3ad8ec84bb8770355f363fda, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 74fe7eed3ad8ec84bb8770355f363fda, type: 3}
 --- !u!1 &932531194 stripped
 GameObject:
@@ -1104,6 +1115,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frameRate: 999
+--- !u!114 &932531196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932531194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9edb94066d87b4dd2bb1a3052b5aafb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followSpeed: 15
+  mouseSpeed: 3
+  cameraDist: 10
+  target: {fileID: 718342094}
+  pivot: {fileID: 0}
+  camTrans: {fileID: 0}
+  minAngle: -5
+  maxAngle: 80
+  lookAngle: 0
+  tiltAngle: 0
 --- !u!1001 &934978951
 PrefabInstance:
   m_ObjectHideFlags: 0

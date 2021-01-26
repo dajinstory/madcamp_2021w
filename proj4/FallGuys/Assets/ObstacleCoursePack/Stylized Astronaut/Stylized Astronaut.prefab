@@ -135,11 +135,10 @@ GameObject:
   - component: {fileID: 95340733316770424}
   - component: {fileID: 778829870737919717}
   - component: {fileID: 3595017097834756086}
-  - component: {fileID: 114551384804589004}
-  - component: {fileID: 143350241100547368}
+  - component: {fileID: 4256387195281471566}
   m_Layer: 0
   m_Name: Stylized Astronaut
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -209,7 +208,7 @@ CapsuleCollider:
   m_Height: 0.24
   m_Direction: 1
   m_Center: {x: 0, y: 0.125, z: -0.01}
---- !u!114 &114551384804589004
+--- !u!114 &4256387195281471566
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -218,7 +217,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1147752367711628}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33e19da6a22259d4299a67d51a3c65f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 01e91b4c6dce949a3a49fb1c374a2fdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
@@ -227,32 +226,14 @@ MonoBehaviour:
   rotateSpeed: 25
   fallSpeed: 0
   airSpeed: 8
-  maxFallSpeed: 20
-  jumpHeight: 4
+  maxFallSpeed: 100
+  jumpHeight: 20
   maxVelocityChange: 10
   moveVelocity: {x: 0, y: 0, z: 0}
   jumpVelocity: {x: 0, y: 0, z: 0}
   fallVelocity: {x: 0, y: 0, z: 0}
   distToGround: 0
-  checkPoint: {x: 0, y: 1, z: 0}
---- !u!143 &143350241100547368
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1147752367711628}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Height: 0.24
-  m_Radius: 0.07
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 0.125, z: -0.01}
+  checkPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &1158021920011488
 GameObject:
   m_ObjectHideFlags: 0
