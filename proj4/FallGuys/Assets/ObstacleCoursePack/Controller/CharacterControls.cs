@@ -16,11 +16,11 @@ public class CharacterControls : MonoBehaviour {
 	private Vector3 moveDir;
     private bool isMove;
     private bool isJump;
+    private bool isGrounded;
     public GameObject cam;
 	private Rigidbody rb;
 	private Animator anim;
     [SerializeField]
-    public bool isGrounded=false;
 
 
 	private float distToGround;
@@ -150,13 +150,7 @@ public class CharacterControls : MonoBehaviour {
         Vector3 h2 = h * cam.transform.right; //Horizontal axis to which I want to move with respect to the camera
         moveDir = (v2 + h2).normalized; //Global position to which I want to move in magnitude 1
         isMove = moveDir.x != 0 || moveDir.z != 0;
-        isJump = Input.GetButtonUp("Jump");// Input.GetButton("Jump");
-        if (isJump)
-        {
-            Debug.Log("jump!");
-            Debug.Log(IsGrounded());
-        }
-        //Input.GetButtonUp("Jump");
+        isJump = Input.GetButtonDown("Jump");// Input.GetButton("Jump");
 
 
         // Hit Check
@@ -192,7 +186,6 @@ public class CharacterControls : MonoBehaviour {
             {
                 anim.SetInteger("AnimationPar", 0);
             }
-
         }
 
     }

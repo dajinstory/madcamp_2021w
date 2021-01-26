@@ -76,6 +76,7 @@
     <Compile Include="Assets\ObstacleCoursePack\Scripts\SavePos.cs" />
     <Compile Include="Assets\ObstacleCoursePack\Scripts\WallMovable.cs" />
     <Compile Include="Assets\ObstacleCoursePack\Stylized Astronaut\Character\Player.cs" />
+    <Compile Include="Assets\ObstacleCoursePack\Stylized Astronaut\Character\PlayerWithoutRigidbody.cs" />
     <Compile Include="Assets\ObstacleCoursePack\Stylized Astronaut\Character\ThirdPersonCamera.cs" />
     <Compile Include="Assets\Photon\PhotonChat\Demos\Common\EventSystemSpawner.cs" />
     <Compile Include="Assets\Photon\PhotonChat\Demos\Common\OnStartDelete.cs" />

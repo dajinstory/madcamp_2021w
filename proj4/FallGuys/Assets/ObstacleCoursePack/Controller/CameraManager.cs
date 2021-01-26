@@ -35,9 +35,9 @@ public class CameraManager : MonoBehaviour {
 
 	void FollowTarget(float d)
 	{ //Function that makes the camera follow the player
-		float speed = d * followSpeed; //Set speed regardless of fps
-		Vector3 targetPosition = Vector3.Lerp(transform.position, target.position, speed); //Bring the camera closer to the player interpolating with the velocity(0.5 half, 1 everything)
-		transform.position = targetPosition; //Update the camera position
+        float speed = d * followSpeed; //Set speed regardless of fps
+        Vector3 targetPosition = Vector3.Lerp(transform.position, target.position, speed); //Bring the camera closer to the player interpolating with the velocity(0.5 half, 1 everything)
+        transform.position = targetPosition; //Update the camera position
 	}
 
 	void HandleRotations(float d, float v, float h, float targetSpeed)
