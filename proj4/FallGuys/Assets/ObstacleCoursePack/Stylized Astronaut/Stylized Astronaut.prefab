@@ -229,6 +229,7 @@ MonoBehaviour:
   maxFallSpeed: 100
   jumpHeight: 20
   maxVelocityChange: 10
+  flipCount: 1
   moveVelocity: {x: 0, y: 0, z: 0}
   jumpVelocity: {x: 0, y: 0, z: 0}
   fallVelocity: {x: 0, y: 0, z: 0}

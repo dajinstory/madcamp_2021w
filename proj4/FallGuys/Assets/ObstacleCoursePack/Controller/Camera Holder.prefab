@@ -133,18 +133,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 8125632388429620749}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c54596d8a698c5b4f8edf8b9cfc74ccb, type: 3}
+  m_Script: {fileID: 11500000, guid: 9edb94066d87b4dd2bb1a3052b5aafb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followSpeed: 15
-  mouseSpeed: 3
-  controllerSpeed: 3
-  cameraDist: 10
+  followSpeed: 3
+  mouseSpeed: 2
+  cameraDist: 3
   target: {fileID: 0}
   pivot: {fileID: 0}
   camTrans: {fileID: 0}
-  minAngle: -5
-  maxAngle: 80
+  minAngle: -35
+  maxAngle: 35
   lookAngle: 0
   tiltAngle: 0
 --- !u!1 &8125632389348269527
