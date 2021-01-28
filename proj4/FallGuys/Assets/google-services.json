@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "789977415988",
+    "project_id": "fallguys-9fcd4",
+    "storage_bucket": "fallguys-9fcd4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:789977415988:android:f471345112365e1216a561",
+        "android_client_info": {
+          "package_name": "com.MadCamp.FallGuys"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "789977415988-qa0a0dq9oevji8ssh5uf03ro4meqg0sg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.MadCamp.FallGuys",
+            "certificate_hash": "35c67241582254f341838ad5c09009876d5864e1"
+          }
+        },
+        {
+          "client_id": "789977415988-35uja2l28p3222jfujkqhoo4anh178rf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAKuUIhWE8eOHNKG5dHd_ln5EL6d7o-68"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "789977415988-35uja2l28p3222jfujkqhoo4anh178rf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
